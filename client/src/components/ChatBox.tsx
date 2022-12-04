@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { BsChatText, BsX } from "react-icons/bs";
+import { IoMdSend } from "react-icons/io";
 import botPicture from "../assets/bot-pic.jpg";
 
 const ChatBubble = styled.div`
@@ -68,7 +69,11 @@ const ChatBoxStyled = styled.div`
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      background-color: rgb(var(--primary-color));
+      background: linear-gradient(
+        -90deg,
+        rgb(var(--primary-color)),
+        rgb(var(--primary-gradient-1))
+      );
       & .chatbox-header-img {
         width: 2.25rem;
         height: 2.25rem;
@@ -105,17 +110,68 @@ const ChatBoxStyled = styled.div`
         }
       }
     }
+    & .chatbox-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: rgb(var(--dark-color));
+      & .chatbox-footer-input {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+        height: 100%;
+        color: rgb(var(--light-color));
+        & input.chatbox-footer-input-field {
+          width: calc(100% - (1rem + 2rem));
+          height: calc(100% - 0.5rem);
+          border: none;
+          border-radius: 1rem;
+          background-color: rgb(var(--light-color), 0.075);
+          color: rgb(var(--light-color));
+          font-size: 1rem;
+          padding: 0 0.75rem;
+          &:focus {
+            outline: none;
+          }
+        }
+        & .chatbox-footer-input-send {
+          width: 2rem;
+          height: 2rem;
+          border-radius: 50%;
+          background-color: rgb(var(--primary-color));
+          display: grid;
+          place-content: center;
+          cursor: pointer;
+          transition: 0.15s;
+          &:hover {
+            scale: 1.05;
+            background-color: rgb(var(--primary-color), 0.85);
+          }
+        }
+      }
+    }
   }
 `;
 
 const ChatBox = () => {
-  const [chatBox, setChatBox] = useState(false);
+  const [chatBox, setChatBox] = useState(true);
   return (
     <>
       <ChatBubble
         className={chatBox ? "active" : ""}
         onClick={() => {
           setChatBox((prev) => !prev);
+          let chatBoxInput = document.querySelector(
+            ".chatbox-footer-input-field"
+          );
+          (chatBoxInput as HTMLElement)?.focus();
         }}
       >
         <BsChatText />
@@ -136,6 +192,19 @@ const ChatBox = () => {
               <BsX />
             </div>
           </header>
+          <main></main>
+          <footer className="chatbox-footer">
+            <div className="chatbox-footer-input">
+              <input
+                type="text"
+                placeholder="Type your message here"
+                className="chatbox-footer-input-field"
+              />
+              <button type="submit" className="chatbox-footer-input-send">
+                <IoMdSend />
+              </button>
+            </div>
+          </footer>
         </div>
       </ChatBoxStyled>
     </>
