@@ -1,16 +1,21 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import styled, { createGlobalStyle, keyframes } from "styled-components";
 import Navbar from "./components/Navbar";
 
 const Home = React.lazy(() => import("./pages/Home"));
 const About = React.lazy(() => import("./pages/About"));
+const ChatBox = React.lazy(() => import("./components/ChatBox"));
 
 const GlobalStyle = createGlobalStyle`
 :root {
   --light-color: 240, 246, 252;
   --dark-color: 13, 17, 23;
   --primary-color: 239, 125, 1;
+  --primary-gradient-1: 253, 167, 76;
+  --secondary-color: 31, 111, 235;
+  --secondary-gradient-1: 109, 166, 253;
+  --white-color: 255, 255, 255;
 }
 * {
   margin: 0;
@@ -35,10 +40,6 @@ body {
   display: grid;
   place-items: center;
 }
-.light {
-  background-color: rgb(var(--light-color));
-  color: rgb(var(--dark-color));
-}
 ::-webkit-scrollbar {
   width: 0.25em;
 }
@@ -52,13 +53,6 @@ body {
 ::-webkit-scrollbar-thumb {
   background: rgba(var(--light-color), 0.5);
   border-radius: 0.5rem;
-}
-.light ::-webkit-scrollbar-thumb {
-  background: rgb(var(--dark-color), 0.5);
-}
-.light ::selection {
-  color: rgb(var(--light-color));
-  background: rgb(var(--primary-color));
 }
 a {
   text-decoration: none;
@@ -113,6 +107,7 @@ const App = () => {
           </ScrollLoading>
         }
       >
+        <ChatBox />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

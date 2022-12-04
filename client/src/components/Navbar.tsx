@@ -13,10 +13,6 @@ const Nav = styled.nav`
   padding: 1rem 2rem;
   background-color: rgb(var(--dark-color));
   color: rgb(var(--light-color), 0.75);
-  .light & {
-    background-color: rgb(var(--light-color));
-    color: rgb(var(--dark-color));
-  }
   & h1{
     font-size: 1.75rem;
     &:hover {
@@ -34,9 +30,6 @@ const Nav = styled.nav`
     list-style: none;
     gap: 1rem;
     font-weight: 500;
-    .light & {
-      color: rgb(var(--dark-color), 0.75);
-    }
     & li {
       transition: 0.15s;
       &:hover {

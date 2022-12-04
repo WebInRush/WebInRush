@@ -21,8 +21,31 @@ const HomeStyled = styled.div`
     align-items: flex-start;
     justify-content: center;
     gap: 1.5rem;
-    h1 span {
-      color: rgb(var(--primary-color), 0.9);
+    & h1 span {
+      &.blue-text {
+        background: linear-gradient(
+          200deg,
+          rgb(var(--secondary-color)) 30%,
+          rgb(var(--secondary-gradient-1)) 60%,
+          rgb(var(--white-color), 0.5)
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: larger;
+      }
+      &.orange-text {
+        background: linear-gradient(
+          15deg,
+          rgb(var(--primary-color)) 30%,
+          rgb(var(--primary-gradient-1)) 60%,
+          rgb(var(--white-color), 0.5)
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: larger;
+      }
     }
   }
 `;
@@ -50,9 +73,9 @@ const Home = () => {
     <HomeStyled>
       <div className="content container">
         <h1>
-          Build your <span>Website</span>
+          Build your <span className="blue-text">Next-Gen</span>
           <br />
-          With us.
+          <span className="orange-text">Website</span> with us.
         </h1>
         <Button>
           <Link to="/contact">Get Started</Link>
