@@ -1,6 +1,7 @@
 import React, { Suspense, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import styled, { createGlobalStyle, keyframes } from "styled-components";
+import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import NotFound from "./pages/NotFound";
 import Register from "./pages/Register";
@@ -47,14 +48,14 @@ body {
   width: 0.25em;
 }
 ::-webkit-scrollbar-track {
-  margin-block: 0.45em;
+  background: transparent;
   transition: all 0.15s ease;
 }
 ::-webkit-scrollbar-track:hover {
-  background: rgba(var(--dark-color), 0.1);
+  background: rgba(var(--dark-color), 0.01);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(var(--light-color), 0.5);
+  background: rgba(var(--light-color), 0.25);
   border-radius: 0.5rem;
 }
 a {
@@ -115,6 +116,7 @@ const App = () => {
           <Route path="/signin" element={<Signin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <Footer />
       </Suspense>
     </div>
   );

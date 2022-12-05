@@ -63,9 +63,6 @@ const Button = styled.button`
     filter: drop-shadow(0 0 0.75rem rgb(var(--primary-color), 0.5));
     padding: 1rem 2.5rem;
   }
-  & a:hover {
-    text-decoration: none;
-  }
 `;
 
 const Home = () => {
