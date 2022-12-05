@@ -161,7 +161,7 @@ const ChatBoxStyled = styled.div`
 `;
 
 const ChatBox = () => {
-  const [chatBox, setChatBox] = useState(true);
+  const [chatBox, setChatBox] = useState(false);
   return (
     <>
       <ChatBubble

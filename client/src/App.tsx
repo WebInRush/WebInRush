@@ -2,6 +2,9 @@ import React, { Suspense, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import styled, { createGlobalStyle, keyframes } from "styled-components";
 import Navbar from "./components/Navbar";
+import NotFound from "./pages/NotFound";
+import Register from "./pages/Register";
+import Signin from "./pages/Signin";
 
 const Home = React.lazy(() => import("./pages/Home"));
 const About = React.lazy(() => import("./pages/About"));
@@ -58,9 +61,6 @@ a {
   text-decoration: none;
   color: inherit;
   transition: 0.15s;
-}
-a:hover{
-  text-decoration: underline;
 }`;
 
 const spinnerAnimation = keyframes`
@@ -111,6 +111,9 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/signin" element={<Signin />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
     </div>
