@@ -3,6 +3,7 @@ import styled from "styled-components";
 import thumbnail from "../assets/background.webp";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
+import axios from "axios";
 
 type Props = {
   bgColor?: string;
@@ -132,17 +133,58 @@ const Thumbnail = styled.div`
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [inputs, setInputs] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(
+        "http://localhost:8800/api/register",
+        inputs
+      );
+      console.log(res);
+    } catch (err) {
+      type Exception = {
+        response: {
+          data: string;
+        };
+      };
+      console.log((err as Exception)?.response?.data);
+    }
+  };
   return (
     <RegisterContainer className="container">
       <div>
-        <FormStyled>
+        <FormStyled onSubmit={handleSubmit}>
           <h1>Register</h1>
-          <input type="text" placeholder="Name" />
-          <input type="email" placeholder="Email" />
+          <input
+            type="text"
+            placeholder="Name"
+            name="name"
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            name="email"
+            onChange={handleChange}
+            required
+          />
           <div>
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Password"
+              autoComplete="on"
+              name="password"
+              onChange={handleChange}
+              required
             />
             <span>
               <FaEye

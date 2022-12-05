@@ -5,19 +5,19 @@ import jwt from "jsonwebtoken";
 
 export const register = async (req: Request, res: Response) => {
   // check if user exists
-  const q = `SELECT * FROM users WHERE username = ?`;
-  db.query(q, [req.body.username], (err, result) => {
+  const q = `SELECT * FROM users WHERE email = ?`;
+  db.query(q, [req.body.email], (err, result) => {
     if (err) {
       res.status(500).send(err);
     } else if (result.length > 0) {
-      res.status(400).send("User already exists!");
+      res.status(409).send("User already exists!");
     } else {
       // create user
+      // hash password
       const salt = bcrypt.genSaltSync(10);
       const hash = bcrypt.hashSync(req.body.password, salt);
-      const q =
-        "INSERT INTO users (`username`, `email`, `password`, `name`) VALUES (?)";
-      const values = [req.body.username, req.body.email, hash, req.body.name];
+      const q = "INSERT INTO users (`name`, `email`, `password`) VALUES (?)";
+      const values = [req.body.name, req.body.email, hash];
       db.query(q, [values], (err, result) => {
         if (err) {
           res.status(500).send(err);
@@ -27,12 +27,10 @@ export const register = async (req: Request, res: Response) => {
       });
     }
   });
-  // create a new user
-  // hash password
 };
 export const login = async (req: Request, res: Response) => {
-  const q = "SELECT * FROM users WHERE username = ?";
-  db.query(q, [req.body.username], (err, result) => {
+  const q = "SELECT * FROM users WHERE email = ?";
+  db.query(q, [req.body.email], (err, result) => {
     if (err) {
       res.status(500).send(err);
     } else if (result.length > 0) {
@@ -45,10 +43,13 @@ export const login = async (req: Request, res: Response) => {
         );
         const { password, ...userWithoutPassword } = user;
         res
-          .cookie("token", token, { httpOnly: true })
+          .cookie("accessToken", token, {
+            secure: true,
+            sameSite: "none",
+            httpOnly: true,
+          })
           .status(200)
-          .send({ user: userWithoutPassword });
-        // res.status(200).send("User has been logged in successfully!");
+          .json({ user: userWithoutPassword });
       } else {
         res.status(400).send("Invalid credentials!");
       }

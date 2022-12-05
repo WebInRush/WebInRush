@@ -2,6 +2,21 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import bg from "../assets/background.webp";
 
+const Button = styled.button`
+  padding: 1rem 2rem;
+  border: none;
+  background-color: rgb(var(--primary-color));
+  color: rgb(var(--light-color));
+  border-radius: 2.25rem;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: 0.15s;
+  &:hover {
+    filter: drop-shadow(0 0 0.75rem rgb(var(--primary-color), 0.5));
+    padding: 1rem 2.5rem;
+  }
+`;
+
 const HomeStyled = styled.div`
   position: relative;
   top: -5rem;
@@ -50,21 +65,6 @@ const HomeStyled = styled.div`
         font-size: larger;
       }
     }
-  }
-`;
-
-const Button = styled.button`
-  padding: 1rem 2rem;
-  border: none;
-  background-color: rgb(var(--primary-color));
-  color: rgb(var(--light-color));
-  border-radius: 2.25rem;
-  font-size: 1rem;
-  font-weight: 500;
-  transition: 0.15s;
-  &:hover {
-    filter: drop-shadow(0 0 0.75rem rgb(var(--primary-color), 0.5));
-    padding: 1rem 2.5rem;
   }
 `;
 

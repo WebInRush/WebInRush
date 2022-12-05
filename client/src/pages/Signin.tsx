@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import thumbnail from "../assets/background.webp";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../context/authContext";
 
 type Props = {
   bgColor?: string;
@@ -131,7 +132,29 @@ const Thumbnail = styled.div`
 `;
 
 const Register = () => {
+  const { login } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
+  const [inputs, setInputs] = useState({
+    email: "",
+    password: "",
+  });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      login(inputs);
+      // navigate("/");
+    } catch (err) {
+      type Exception = {
+        response: {
+          data: string;
+        };
+      };
+      console.log((err as Exception)?.response?.data);
+    }
+  };
   return (
     <RegisterContainer className="container">
       <div>
@@ -154,13 +177,23 @@ const Register = () => {
             </Button>
           </div>
         </Thumbnail>
-        <FormStyled>
+        <FormStyled onSubmit={handleSubmit}>
           <h1>Sign in</h1>
-          <input type="email" placeholder="Email" />
+          <input
+            type="email"
+            placeholder="Email"
+            name="email"
+            onChange={handleChange}
+            required
+          />
           <div>
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Password"
+              autoComplete="on"
+              name="password"
+              onChange={handleChange}
+              required
             />
             <span>
               <FaEye
