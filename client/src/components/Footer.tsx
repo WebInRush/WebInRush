@@ -50,7 +50,7 @@ const FooterElement = styled.footer`
 
 const Footer = () => {
   return (
-    <FooterElement>
+    <FooterElement className="container">
       <div>
         <div className="row">
           <div className="col">
@@ -61,8 +61,8 @@ const Footer = () => {
             <div className="col-body">
               <ul>
                 <li>
-                  Designed and built with all the love in the world by the
-                  SUBID DAS using MERN Stack.
+                  Designed and built with all the love in the world by the SUBID
+                  DAS using MERN Stack.
                 </li>
                 <li>Code licensed GNU General Public License v3.0.</li>
               </ul>

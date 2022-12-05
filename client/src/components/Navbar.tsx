@@ -31,7 +31,7 @@ const Nav = styled.nav<Props>`
   & h1 {
     font-size: 1.75rem;
     &:hover {
-      filter: drop-shadow(0 0 0.75rem rgb(var(--primary-color)));
+      filter: drop-shadow(0 0 0.75rem rgb(var(--primary-color), 0.25));
       color: rgb(var(--primary-color), 0.9);
     }
   }
@@ -63,16 +63,13 @@ const Nav = styled.nav<Props>`
 
 const PsuedoElement = styled.div`
   height: 5rem;
-  @media screen and (max-width: 50rem) {
-    height: 6rem;
-  }
 `;
 
 const Navbar = () => {
   const [scroll, setScroll] = useState(false);
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      setScroll(window.scrollY > window.innerHeight * 0.25);
+      setScroll(window.scrollY > window.innerHeight * 0.1);
     });
   }, []);
   const navbar = {

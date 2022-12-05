@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import thumbnail from "../../public/background.webp";
+import thumbnail from "../assets/background.webp";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useState } from "react";
 
 type Props = {
   bgColor?: string;
@@ -76,6 +78,30 @@ const FormStyled = styled.form`
     background: transparent;
     font-size: 1rem;
     color: rgb(var(--light-color));
+    transition: 0.15s;
+    &:focus {
+      border-bottom-color: rgb(var(--primary-color), 0.5);
+    }
+  }
+  & > div {
+    position: relative;
+    width: 100%;
+    & > span {
+      user-select: none;
+      font-size: 1.25rem;
+      & > svg {
+        position: absolute;
+        right: 0.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        transition: 0.15s;
+        &.hidden {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+    }
   }
 `;
 
@@ -105,14 +131,30 @@ const Thumbnail = styled.div`
 `;
 
 const Register = () => {
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <RegisterContainer className="container">
       <div>
         <FormStyled>
           <h1>Register</h1>
-          <input type="text" placeholder="Username" />
+          <input type="text" placeholder="Name" />
           <input type="email" placeholder="Email" />
-          <input type="password" placeholder="Password" />
+          <div>
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+            />
+            <span>
+              <FaEye
+                className={showPassword ? "hidden" : ""}
+                onClick={() => setShowPassword((prev) => !prev)}
+              />
+              <FaEyeSlash
+                className={!showPassword ? "hidden" : ""}
+                onClick={() => setShowPassword((prev) => !prev)}
+              />
+            </span>
+          </div>
           <Button type="submit" bgColor="--primary-color">
             Register
           </Button>
@@ -132,7 +174,7 @@ const Register = () => {
           <div className="ifExist">
             <p>Already have an account?</p>
             <Button bgColor="--light-color" textColor="--primary-color">
-              <Link to="/login">Login</Link>
+              <Link to="/signin">Sign in</Link>
             </Button>
           </div>
         </Thumbnail>

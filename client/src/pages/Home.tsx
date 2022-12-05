@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import bg from "../assets/background.webp";
 
 const HomeStyled = styled.div`
+  position: relative;
+  top: -5rem;
   display: grid;
   place-items: center;
   min-height: 100vh;
@@ -11,7 +14,7 @@ const HomeStyled = styled.div`
       rgb(var(--dark-color)),
       transparent
     ),
-    url(/background.webp);
+    url(${bg});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
