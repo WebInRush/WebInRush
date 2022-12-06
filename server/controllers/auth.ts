@@ -42,8 +42,11 @@ export const login = async (req: Request, res: Response) => {
           process.env.JWT_SECRET || "secretkey"
         );
         const { password, ...userWithoutPassword } = user;
+        console.log(req.cookies);
+        // set cookie
         res
           .cookie("accessToken", token, {
+            expires: new Date(Date.now() + 3600000 * 1000 * 120),
             secure: true,
             sameSite: "none",
             httpOnly: true,

@@ -6,10 +6,12 @@ const Button = styled.button`
   padding: 1rem 2rem;
   border: none;
   background-color: rgb(var(--primary-color));
-  color: rgb(var(--light-color));
+  color: rgb(var(--dark-color));
   border-radius: 2.25rem;
   font-size: 1rem;
   font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
   transition: 0.15s;
   &:hover {
     filter: drop-shadow(0 0 0.75rem rgb(var(--primary-color), 0.5));
