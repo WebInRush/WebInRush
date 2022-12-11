@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import thumbnail from "../assets/background.webp";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState, useContext } from "react";
 import { AuthContext } from "../context/authContext";
+import { AxiosError } from "axios";
 
 type Props = {
   bgColor?: string;
@@ -26,7 +27,7 @@ const Button = styled.button<Props>`
   }
 `;
 
-const RegisterContainer = styled.div`
+const SigninContainer = styled.div`
   min-height: 100vh;
   display: grid;
   place-items: center;
@@ -131,9 +132,11 @@ const Thumbnail = styled.div`
   }
 `;
 
-const Register = () => {
+const Signin = () => {
+  const navigate = useNavigate();
   const { login } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -143,20 +146,17 @@ const Register = () => {
   };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      login(inputs);
-      // navigate("/");
-    } catch (err) {
-      type Exception = {
-        response: {
-          data: string;
-        };
-      };
-      console.log((err as Exception)?.response?.data);
-    }
+    login(inputs)
+      .then(() => navigate("/"))
+      .catch((err) =>
+        setError(
+          ((err as AxiosError)?.response?.data as string) ||
+            (err as AxiosError)?.message
+        )
+      );
   };
   return (
-    <RegisterContainer className="container">
+    <SigninContainer className="container">
       <div>
         <Thumbnail>
           <h1>WebInRush.</h1>
@@ -206,13 +206,22 @@ const Register = () => {
               />
             </span>
           </div>
+          <p style={{ color: "red" }}>
+            {error != "" &&
+              (() => {
+                setTimeout(() => {
+                  setError("");
+                }, 5000);
+                return error;
+              })()}
+          </p>
           <Button type="submit" bgColor="--primary-color">
             Sign in
           </Button>
         </FormStyled>
       </div>
-    </RegisterContainer>
+    </SigninContainer>
   );
 };
 
-export default Register;
+export default Signin;

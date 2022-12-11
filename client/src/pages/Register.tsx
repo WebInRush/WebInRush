@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import thumbnail from "../assets/background.webp";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 type Props = {
   bgColor?: string;
@@ -63,6 +63,7 @@ const FormStyled = styled.form`
   justify-content: center;
   height: 100%;
   width: 100%;
+  transition: all;
   & > h1 {
     font-size: 2rem;
     font-weight: 600;
@@ -132,7 +133,9 @@ const Thumbnail = styled.div`
 `;
 
 const Register = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
   const [inputs, setInputs] = useState({
     name: "",
     email: "",
@@ -144,18 +147,13 @@ const Register = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:8800/api/register",
-        inputs
-      );
-      console.log(res);
+      await axios.post("http://localhost:8800/api/register", inputs);
+      navigate("/");
     } catch (err) {
-      type Exception = {
-        response: {
-          data: string;
-        };
-      };
-      console.log((err as Exception)?.response?.data);
+      setError(
+        ((err as AxiosError)?.response?.data as string) ||
+          ((err as AxiosError)?.message as string)
+      );
     }
   };
   return (
@@ -197,6 +195,15 @@ const Register = () => {
               />
             </span>
           </div>
+          <p style={{ color: "red" }}>
+            {error != "" &&
+              (() => {
+                setTimeout(() => {
+                  setError("");
+                }, 5000);
+                return error;
+              })()}
+          </p>
           <Button type="submit" bgColor="--primary-color">
             Register
           </Button>
