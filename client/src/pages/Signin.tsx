@@ -195,16 +195,18 @@ const Signin = () => {
               onChange={handleChange}
               required
             />
-            <span>
-              <FaEye
-                className={showPassword ? "hidden" : ""}
-                onClick={() => setShowPassword((prev) => !prev)}
-              />
-              <FaEyeSlash
-                className={!showPassword ? "hidden" : ""}
-                onClick={() => setShowPassword((prev) => !prev)}
-              />
-            </span>
+            {inputs.password != "" && (
+              <span>
+                <FaEye
+                  className={showPassword ? "hidden" : ""}
+                  onClick={() => setShowPassword((prev) => !prev)}
+                />
+                <FaEyeSlash
+                  className={!showPassword ? "hidden" : ""}
+                  onClick={() => setShowPassword((prev) => !prev)}
+                />
+              </span>
+            )}
           </div>
           <p style={{ color: "red" }}>
             {error != "" &&
