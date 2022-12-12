@@ -1,15 +1,16 @@
-import React, { Suspense, useState } from "react";
+import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import styled, { createGlobalStyle, keyframes } from "styled-components";
-import Footer from "./components/Footer";
-import Navbar from "./components/Navbar";
-import NotFound from "./pages/NotFound";
-import Register from "./pages/Register";
-import Signin from "./pages/Signin";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-const Home = React.lazy(() => import("./pages/Home"));
-const About = React.lazy(() => import("./pages/About"));
-const ChatBox = React.lazy(() => import("./components/ChatBox"));
+const Home = lazy(() => import("./pages/Home"));
+const About = lazy(() => import("./pages/About"));
+const ChatBox = lazy(() => import("./components/ChatBox"));
+const Footer = lazy(() => import("./components/Footer"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const Register = lazy(() => import("./pages/Register"));
+const Signin = lazy(() => import("./pages/Signin"));
+const Navbar = lazy(() => import("./components/Navbar"));
 
 const GlobalStyle = createGlobalStyle`
 :root {
@@ -96,28 +97,32 @@ const ScrollLoading = styled.div`
   }
 `;
 
+const queryClient = new QueryClient();
+
 const App = () => {
   return (
     <div className="App">
       <GlobalStyle />
-      <Navbar />
-      <Suspense
-        fallback={
-          <ScrollLoading>
-            <span></span>
-          </ScrollLoading>
-        }
-      >
-        <ChatBox />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/signin" element={<Signin />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Footer />
-      </Suspense>
+      <QueryClientProvider client={queryClient}>
+        <Suspense
+          fallback={
+            <ScrollLoading>
+              <span></span>
+            </ScrollLoading>
+          }
+        >
+          <Navbar />
+          <ChatBox />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/signin" element={<Signin />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <Footer />
+        </Suspense>
+      </QueryClientProvider>
     </div>
   );
 };
