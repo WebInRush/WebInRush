@@ -72,18 +72,25 @@ const HomeStyled = styled.div`
 
 const Home = () => {
   return (
-    <HomeStyled>
-      <div className="content container">
-        <h1>
-          Build your <span className="blue-text">Next-Gen</span>
-          <br />
-          <span className="orange-text">Website</span> with us.
-        </h1>
-        <Button>
-          <Link to="/contact">Get Started</Link>
-        </Button>
-      </div>
-    </HomeStyled>
+    <>
+      <HomeStyled>
+        <div className="content container">
+          <h1>
+            Build your <span className="blue-text">Next-Gen</span>
+            <br />
+            <span className="orange-text">Website</span> with us.
+          </h1>
+          <Button>
+            <Link to="/contact">Get Started</Link>
+          </Button>
+        </div>
+      </HomeStyled>
+      <section className="categories">
+        <div className="students"></div>
+        <div className="portfolio"></div>
+        <div className="business"></div>
+      </section>
+    </>
   );
 };
 
