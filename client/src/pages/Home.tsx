@@ -109,7 +109,12 @@ const Category = styled.section`
       padding: 1.5rem;
       display: flex;
       flex-direction: column;
+      transition: 0.15s;
       gap: 1rem;
+      &:hover {
+        transform: translateY(-0.5rem);
+        box-shadow: rgb(var(--white-color), 0.25) 0 0.25rem 1rem;
+      }
       & h3 {
         color: rgb(var(--white-color));
         font-size: 1.5rem;
@@ -147,20 +152,24 @@ const Category = styled.section`
       }
       & button {
         padding: 0.5rem 1rem;
-        border: none;
         background-color: rgb(var(--white-color));
         color: rgb(var(--dark-color));
+        border: 2px solid transparent;
         border-radius: 2.25rem;
         font-size: 0.875rem;
         font-weight: 600;
         letter-spacing: 0.05rem;
+        cursor: pointer;
         transition: 0.15s;
         &:hover {
-          filter: drop-shadow(0 0 0.5rem rgb(var(--white-color), 0.5));
+          background-color: transparent;
+          color: rgb(var(--white-color));
+          border: 2px solid rgb(var(--white-color));
+          box-shadow: rgb(var(--white-color), 0.25) 0 0.25rem 1rem;
           padding: 0.5rem 1.5rem;
         }
       }
-      & .attr{
+      & .attr {
         position: absolute;
         top: 0;
         right: 0;
@@ -171,7 +180,6 @@ const Category = styled.section`
         font-weight: 600;
         letter-spacing: 0.05rem;
         border-radius: 0 0 0 1rem;
-
       }
     }
   }
