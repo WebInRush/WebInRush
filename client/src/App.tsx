@@ -15,7 +15,7 @@ const Navbar = lazy(() => import("./components/Navbar"));
 const GlobalStyle = createGlobalStyle`
 :root {
   --light-color: 240, 246, 252;
-  --dark-color: 13, 17, 23;
+  --dark-color: 0, 0, 0;
   --primary-color: 239, 125, 1;
   --primary-gradient-1: 253, 167, 76;
   --secondary-color: 31, 111, 235;
