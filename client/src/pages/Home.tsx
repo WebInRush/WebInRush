@@ -186,6 +186,16 @@ const Category = styled.section`
 `;
 
 const Home = () => {
+  let skills = [
+    "HTML",
+    "Tailwind CSS / Bootstrap / Styled Components",
+    "TS / JS",
+    "React JS",
+    "Node JS",
+    "Express JS",
+    "MongoDB / SQL",
+  ];
+
   return (
     <>
       <HomeStyled>
@@ -207,24 +217,11 @@ const Home = () => {
             <h3>Students</h3>
             <p>For students who want to build their own website or project.</p>
             <ul>
-              <li>
-                <IoIosCheckmarkCircle /> HTML/CSS
-              </li>
-              <li>
-                <IoIosCheckmarkCircle /> JS
-              </li>
-              <li>
-                <IoIosCheckmarkCircle /> React JS
-              </li>
-              <li>
-                <IoIosCheckmarkCircle /> Node JS
-              </li>
-              <li>
-                <IoIosCheckmarkCircle /> MongoDB / SQL
-              </li>
-              <li>
-                <IoIosCheckmarkCircle /> Express JS
-              </li>
+              {skills.map((skill) => (
+                <li>
+                  <IoIosCheckmarkCircle /> {skill}
+                </li>
+              ))}
             </ul>
             <button>Get Started</button>
           </div>
@@ -238,25 +235,12 @@ const Home = () => {
               work to the world.
             </p>
             <ul>
-              <li>
-                <IoIosCheckmarkCircle /> HTML/CSS
-              </li>
-              <li>
-                <IoIosCheckmarkCircle /> JS
-              </li>
-              <li>
-                <IoIosCheckmarkCircle /> React JS
-              </li>
-              <li>
-                <IoIosCheckmarkCircle /> Node JS
-              </li>
-              <li>
-                <IoIosCheckmarkCircle /> MongoDB / SQL
-              </li>
-              <li>
-                <IoIosCheckmarkCircle /> Express JS
-              </li>
-            </ul>
+              {skills.map((skill) => (
+                <li>
+                  <IoIosCheckmarkCircle /> {skill}
+                </li>
+              ))}
+            </ul>            
             <button>Get Started</button>
           </div>
           <div className="business card">
@@ -266,24 +250,11 @@ const Home = () => {
               or promote their products.
             </p>
             <ul>
-              <li>
-                <IoIosCheckmarkCircle /> HTML/CSS
-              </li>
-              <li>
-                <IoIosCheckmarkCircle /> JS
-              </li>
-              <li>
-                <IoIosCheckmarkCircle /> React JS
-              </li>
-              <li>
-                <IoIosCheckmarkCircle /> Node JS
-              </li>
-              <li>
-                <IoIosCheckmarkCircle /> MongoDB / SQL
-              </li>
-              <li>
-                <IoIosCheckmarkCircle /> Express JS
-              </li>
+              {skills.map((skill) => (
+                <li>
+                  <IoIosCheckmarkCircle /> {skill}
+                </li>
+              ))}
             </ul>
             <button>Get Started</button>
           </div>

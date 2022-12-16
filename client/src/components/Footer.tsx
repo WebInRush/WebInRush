@@ -46,6 +46,13 @@ const FooterElement = styled.footer`
       }
     }
   }
+  & .credits {
+    font-size: 1rem;
+    color: rgb(var(--light-color), 0.5);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+  }
 `;
 
 const Footer = () => {
