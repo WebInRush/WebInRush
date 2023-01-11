@@ -4,7 +4,6 @@ import users from "./routes/users";
 import auth from "./routes/auth";
 import assignProjects from "./routes/assignProjects";
 import cookieParser from "cookie-parser";
-require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -15,7 +14,7 @@ const port = process.env.PORT || 3000;
 // Middlewares
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ credentials: true, origin: "http://127.0.0.1:5173" }));
+app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 
 app.use("/api", users);
 app.use("/api", auth);
