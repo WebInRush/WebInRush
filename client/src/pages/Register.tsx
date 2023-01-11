@@ -141,13 +141,14 @@ const Register = () => {
     email: "",
     password: "",
   });
+  const host = process.env.REACT_APP_SERVER_URL || "http://localhost:8080";
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8800/api/register", inputs);
+      await axios.post(`${host}/api/register`, inputs);
       navigate("/");
     } catch (err) {
       setError(

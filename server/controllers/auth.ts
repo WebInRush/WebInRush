@@ -56,7 +56,7 @@ export const login = async (req: Request, res: Response) => {
         res.status(400).send("Invalid credentials!");
       }
     } else {
-      res.status(400).send("Invalid credentials!");
+      res.status(400).send("Invalid credentials!1");
     }
   });
 };

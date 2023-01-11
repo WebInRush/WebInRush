@@ -6,6 +6,8 @@ type User = {
   password: String;
 };
 
+const host = process.env.REACT_APP_SERVER_URL || "http://localhost:8080";
+
 export const AuthContext = createContext({
   currentUser: null,
   login: (userData: User): Promise<void> => {
@@ -22,7 +24,7 @@ export const AuthContextProvider = ({ children }: any) => {
   );
   const login = async (userData: User): Promise<void> => {
     return axios
-      .post("http://localhost:8800/api/login", userData, {
+      .post(`${host}/api/login`, userData, {
         withCredentials: true,
       })
       .then((res) => {

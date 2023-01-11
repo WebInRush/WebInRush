@@ -217,8 +217,8 @@ const Home = () => {
             <h3>Students</h3>
             <p>For students who want to build their own website or project.</p>
             <ul>
-              {skills.map((skill) => (
-                <li>
+              {skills.map((skill, index) => (
+                <li key={index}>
                   <IoIosCheckmarkCircle /> {skill}
                 </li>
               ))}
@@ -235,12 +235,12 @@ const Home = () => {
               work to the world.
             </p>
             <ul>
-              {skills.map((skill) => (
-                <li>
+              {skills.map((skill, index) => (
+                <li key={index}>
                   <IoIosCheckmarkCircle /> {skill}
                 </li>
               ))}
-            </ul>            
+            </ul>
             <button>Get Started</button>
           </div>
           <div className="business card">
@@ -250,8 +250,8 @@ const Home = () => {
               or promote their products.
             </p>
             <ul>
-              {skills.map((skill) => (
-                <li>
+              {skills.map((skill, index) => (
+                <li key={index}>
                   <IoIosCheckmarkCircle /> {skill}
                 </li>
               ))}
