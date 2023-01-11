@@ -6,7 +6,7 @@ type User = {
   password: String;
 };
 
-const host = process.env.REACT_APP_SERVER_URL || "http://localhost:8080";
+const host = "http://localhost:8080";
 
 export const AuthContext = createContext({
   currentUser: null,
