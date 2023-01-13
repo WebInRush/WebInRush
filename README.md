@@ -1,15 +1,15 @@
 <div align="center">
 
-# [WebInRush](https://itsme-subid.vercel.app/)
+# [WebInRush](https://WebInRush.vercel.app/)
 
-![](https://raw.githubusercontent.com/itsme-Subid/WebInRush/main/preview.webp)
-![](https://img.shields.io/github/license/itsme-Subid/WebInRush?style=for-the-badge)
-![](https://img.shields.io/github/languages/top/itsme-Subid/WebInRush?style=for-the-badge)
-![](https://img.shields.io/github/languages/count/itsme-Subid/WebInRush?style=for-the-badge)
-![](https://img.shields.io/github/languages/code-size/itsme-Subid/WebInRush?style=for-the-badge)
-![](https://img.shields.io/github/repo-size/itsme-Subid/WebInRush?style=for-the-badge)
-![](https://img.shields.io/github/last-commit/itsme-Subid/WebInRush?style=for-the-badge)
-![](https://img.shields.io/github/commit-activity/w/itsme-Subid/WebInRush?style=for-the-badge)
+![](https://raw.githubusercontent.com/WebInRush/WebInRush/main/preview.webp)
+![](https://img.shields.io/github/license/WebInRush/WebInRush?style=for-the-badge)
+![](https://img.shields.io/github/languages/top/WebInRush/WebInRush?style=for-the-badge)
+![](https://img.shields.io/github/languages/count/WebInRush/WebInRush?style=for-the-badge)
+![](https://img.shields.io/github/languages/code-size/WebInRush/WebInRush?style=for-the-badge)
+![](https://img.shields.io/github/repo-size/WebInRush/WebInRush?style=for-the-badge)
+![](https://img.shields.io/github/last-commit/WebInRush/WebInRush?style=for-the-badge)
+![](https://img.shields.io/github/commit-activity/w/WebInRush/WebInRush?style=for-the-badge)
 
 </div>
 
@@ -24,7 +24,7 @@ To get started, you can simply clone this repository and install the dependencie
 To clone the repository, you will need to have git installed on your machine. Once you have those, you can use the following commands:
 
 ```bash
-git clone https://github.com/itsme-Subid/WebInRush.git
+git clone https://github.com/WebInRush/WebInRush.git
 ```
 
 ### Running the Project
@@ -57,4 +57,4 @@ This will start the development server and you should be able to see the website
 
 ## License
 
-This project is licensed under the GPL-3.0 License - see the [LICENSE.md](https://github.com/itsme-Subid/WebInRush/blob/main/LICENSE) file for details
+This project is licensed under the GPL-3.0 License - see the [LICENSE.md](https://github.com/WebInRush/WebInRush/blob/main/LICENSE) file for details
