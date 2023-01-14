@@ -8,7 +8,7 @@ The intended readers of this document are current and future developers working 
 
 ## Overview
 
-In today’s world, owning to the heavy workload on the employees, they are having a huge amount of stress in their lives. Even with the presence of so many gadgets in and around them, they are not able to relieve their stress. I created a startup called WebInRush. WebInRush is a full-service web design and development company based in India that specializes in creating customized websites for clients globally. Our team of experienced professionals offers a range of services, including web design, development, SEO, and custom web hosting solutions. We take a comprehensive approach, from concept to launch, to ensure that our clients' websites are optimized for the best user experience. Utilizing technologies such as Next.js, TypeScript, and Styled-Components, we strive to deliver high-quality service and exceptional results.
+WebInRush is a startup that addresses the need for high-quality web design and development services. As the demand for customized websites increases, there is a shortage of skilled programmers who can deliver beautiful websites. Our company, based in India, specializes in providing a full range of services including web design, development, SEO, and custom web hosting solutions to clients globally. We take an all-inclusive approach to ensure that our clients' websites are optimized for the best user experience. By utilizing advanced technologies such as Next.js, TypeScript, and Styled-Components, we aim to deliver exceptional results and meet the high standard of our clients.
 
 ## Customers
 
