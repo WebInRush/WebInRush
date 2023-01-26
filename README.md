@@ -1,60 +1,38 @@
-<div align="center">
-
-# [WebInRush](https://WebInRush.vercel.app/)
-
-![](https://raw.githubusercontent.com/WebInRush/WebInRush/main/preview.webp)
-![](https://img.shields.io/github/license/WebInRush/WebInRush?style=for-the-badge)
-![](https://img.shields.io/github/languages/top/WebInRush/WebInRush?style=for-the-badge)
-![](https://img.shields.io/github/languages/count/WebInRush/WebInRush?style=for-the-badge)
-![](https://img.shields.io/github/languages/code-size/WebInRush/WebInRush?style=for-the-badge)
-![](https://img.shields.io/github/repo-size/WebInRush/WebInRush?style=for-the-badge)
-![](https://img.shields.io/github/last-commit/WebInRush/WebInRush?style=for-the-badge)
-![](https://img.shields.io/github/commit-activity/w/WebInRush/WebInRush?style=for-the-badge)
-
-</div>
-
-Welcome to the WebInRush repository! WebInRush is a full-service web design and development company based in India that specializes in creating customized websites for clients globally. Our team of experienced professionals offers a range of services, including web design, development, SEO, and custom web hosting solutions. We take a comprehensive approach, from concept to launch, to ensure that our clients' websites are optimized for the best user experience. Utilizing technologies such as Next.js, TypeScript, and Styled-Components, we strive to deliver high-quality service and exceptional results.
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-To get started, you can simply clone this repository and install the dependencies.
-
-### Cloning the Repository
-
-To clone the repository, you will need to have git installed on your machine. Once you have those, you can use the following commands:
+First, run the development server:
 
 ```bash
-git clone https://github.com/WebInRush/WebInRush.git
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
 ```
 
-### Running the Project
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-To run the project, you will need to have Node.js and npm or yarn or pnpm installed on your machine. Once you have those, you can use the following commands:
+You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-```bash
-cd WebInRush/client
-npm install
-npm run both
-```
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-or, if you are using yarn:
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-```bash
-cd WebInRush/client
-yarn
-yarn run both
-```
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-or, if you are using pnpm:
+## Learn More
 
-```bash
-cd WebInRush/client
-pnpm install
-pnpm run both
-```
+To learn more about Next.js, take a look at the following resources:
 
-This will start the development server and you should be able to see the website by visiting http://localhost:3000 in your browser.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-## License
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-This project is licensed under the GPL-3.0 License - see the [LICENSE.md](https://github.com/WebInRush/WebInRush/blob/main/LICENSE) file for details
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
