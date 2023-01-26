@@ -108,7 +108,7 @@ const Signin = () => {
   // google handler function
   async function handleGoogleLogin() {
     signIn("google", {
-      callbackUrl: "/",
+      callbackUrl: "/dashboard",
     });
   }
   return (

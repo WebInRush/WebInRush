@@ -3,8 +3,6 @@ import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
 require("dotenv").config();
 
-console.log(process.env);
-
 export const authOptions = {
   secret: process.env.SECRET,
   providers: [

@@ -53,6 +53,16 @@ const Nav = styled.nav<Props>`
         filter: drop-shadow(0 0 0.75rem rgb(var(--primary-color)));
         color: rgb(var(--primary-color), 0.9);
       }
+      &.special {
+        padding: 0.5rem 1.25rem;
+        border-radius: 2rem;
+        color: rgb(var(--white-color), 0.9);
+        background: rgb(var(--secondary-color));
+        &:hover {
+          filter: drop-shadow(0 0 0.5rem rgb(var(--secondary-color), 0.5));
+          color: rgb(var(--white-color));
+        }
+      }
     }
   }
 `;
@@ -97,10 +107,10 @@ const Navbar = () => {
           {!session ? (
             <>
               <li>
-                <Link href="/auth/register">Sign Up</Link>
-              </li>
-              <li>
                 <Link href="/auth/signin">Sign In</Link>
+              </li>
+              <li className="special">
+                <Link href="/auth/register">Sign Up</Link>
               </li>
             </>
           ) : (
@@ -112,8 +122,8 @@ const Navbar = () => {
               >
                 Logout
               </li>
-              <li>
-                <Link href="/dasboard">DASHBOARD</Link>
+              <li className="special">
+                <Link href="/dashboard">Dasboard</Link>
               </li>
             </>
           )}
