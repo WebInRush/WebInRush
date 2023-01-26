@@ -205,7 +205,7 @@ const Home = () => {
             Build your <span className="blue-text">Next-Gen</span>
             <br />
             <span className="orange-text">Website</span> with us.
-            {session && <span>{session.user?.name}</span>}
+            {session && <div>{session.user?.name}</div>}
           </h1>
           <Button>
             <Link href="/contact">Get Started</Link>
