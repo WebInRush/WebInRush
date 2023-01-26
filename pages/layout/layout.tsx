@@ -21,6 +21,7 @@ const LayoutContainer = styled.div`
     border-radius: 1rem;
     overflow: hidden;
     grid-template-columns: 1fr;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     @media screen and (min-width: 50rem) {
       display: grid;
       place-content: center;
@@ -35,7 +36,7 @@ const Thumbnail = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-end;
   height: 100%;
   width: 100%;
   background: no-repeat center center/cover;
@@ -48,7 +49,11 @@ const Thumbnail = styled.div`
   & > h1 {
     font-size: 3.5rem;
     font-weight: 600;
-    margin: 0 auto 1rem 0;
+  }
+  & .description p {
+    text-align: justify;
+    color: rgb(var(--light-color), 0.75);
+    font-size: 0.8rem;
   }
   & .ifExist {
     margin-top: 1rem;

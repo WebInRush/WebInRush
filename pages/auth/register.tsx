@@ -5,27 +5,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import axios, { AxiosError } from "axios";
 import Layout from "../layout/layout";
-
-type Props = {
-  bgColor?: string;
-  textColor?: string;
-};
-
-const Button = styled.button<Props>`
-  margin-top: 1rem;
-  padding: 0.5rem 1.5rem;
-  border: none;
-  background-color: rgb(var(${(props) => props.bgColor}));
-  color: rgb(var(${(props) => props.textColor}));
-  border-radius: 2.25rem;
-  font-size: 1rem;
-  font-weight: 500;
-  transition: 0.15s;
-  &:hover {
-    filter: drop-shadow(0 0 0.75rem rgb(var(${(props) => props.bgColor}), 0.5));
-    padding: 0.5rem 2.5rem;
-  }
-`;
+import Button from "../../components/Button";
 
 const FormStyled = styled.form`
   padding: 3rem 2rem;
@@ -43,7 +23,7 @@ const FormStyled = styled.form`
   }
   & input {
     width: 100%;
-    padding: 0.5rem 0.25rem;
+    padding: 0.5rem 0;
     margin: 1.5rem 0;
     border: none;
     border-bottom: 0.15rem solid rgb(var(--light-color), 0.5);
@@ -80,6 +60,8 @@ const FormStyled = styled.form`
   & .ifExist {
     margin-top: 2rem;
     font-style: 0.9rem;
+    width: 100%;
+    text-align: center;
     & a {
       color: rgb(var(--primary-color));
     }

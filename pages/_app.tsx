@@ -19,18 +19,18 @@ const poppins = Poppins({
 const GlobalStyle = createGlobalStyle`
 :root {
   --light-color: 240, 246, 252;
-  --dark-color: 0, 0, 0;
-  --primary-color: 239, 125, 1;
-  --primary-gradient-1: 253, 167, 76;
-  --secondary-color: 31, 111, 235;
-  --secondary-gradient-1: 109, 166, 253;
+  --dark-color: 2, 48, 71;
+  --primary-color: 251, 133, 0;
+  --primary-gradient-1: 255, 183, 3;
+  --secondary-color: 33, 158, 188;
+  --secondary-gradient-1: 142, 202, 230;
   --white-color: 255, 255, 255;
 }
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: system-ui;
+  font-family: var(--font-poppins, sans-serif);
   outline: none;
 }
 body {
