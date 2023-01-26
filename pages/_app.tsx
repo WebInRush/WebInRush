@@ -1,9 +1,10 @@
+import Loading from "./loading";
 import Head from "next/head";
 import type { AppProps } from "next/app";
 import { Poppins } from "@next/font/google";
 import { createGlobalStyle } from "styled-components";
 import { motion } from "framer-motion";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import favicon from "./../public/icons/favicon.ico";
 import { SessionProvider } from "next-auth/react";
 
@@ -78,6 +79,10 @@ export default function App({
   Component,
   pageProps: { session, ...pageProps },
 }: AppProps) {
+  const [domLoaded, setDomLoaded] = useState<boolean>(false);
+  useEffect(() => {
+    setDomLoaded(true);
+  }, []);
   return (
     <SessionProvider session={session}>
       <Head>
@@ -86,16 +91,18 @@ export default function App({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href={favicon.src} />
       </Head>
-      <div className={poppins.variable}>
-        <GlobalStyle />
-        <Suspense>
-          <motion.div variants={container} initial="hidden" animate="show">
-            <Header />
-            <Component {...pageProps} />
-            <Footer />
-          </motion.div>
-        </Suspense>
-      </div>
+      <GlobalStyle />
+      <Suspense fallback={<Loading />}>
+        {domLoaded && (
+          <div className={poppins.variable}>
+            <motion.div variants={container} initial="hidden" animate="show">
+              <Header />
+              <Component {...pageProps} />
+              <Footer />
+            </motion.div>
+          </div>
+        )}
+      </Suspense>
     </SessionProvider>
   );
 }

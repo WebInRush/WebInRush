@@ -25,7 +25,7 @@ export default function Loader() {
         width={"80%"}
         height={"30%"}
         style={{
-          background: "rgba(0,0,0, 0.25)",
+          background: "rgba(0,0,0, 0.1)",
         }}
       />
       <Skeleton
@@ -33,7 +33,7 @@ export default function Loader() {
         width={"80%"}
         height={60}
         style={{
-          background: "rgba(0,0,0, 0.25)",
+          background: "rgba(0,0,0, 0.1)",
         }}
       />
       <Skeleton
@@ -41,7 +41,7 @@ export default function Loader() {
         width={"80%"}
         height={"30%"}
         style={{
-          background: "rgba(0,0,0, 0.25)",
+          background: "rgba(0,0,0, 0.1)",
         }}
       />
       <Skeleton
@@ -49,7 +49,7 @@ export default function Loader() {
         width={"80%"}
         height={60}
         style={{
-          background: "rgba(0,0,0, 0.25)",
+          background: "rgba(0,0,0, 0.1)",
         }}
       />
     </Loading>

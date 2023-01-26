@@ -2,77 +2,186 @@ import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
+import { FaHamburger } from "react-icons/fa";
 
-type Props = {
-  transparent?: boolean;
-};
-
-const Nav = styled.nav<Props>`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 2;
+const Navbar = styled.nav`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  transition: 0.15s;
-  background-image: linear-gradient(
-    to bottom,
-    rgb(var(--dark-color), 0.5),
-    transparent
-  );
-  ${(props) =>
-    props.transparent &&
-    css`
-      background-color: rgb(var(--dark-color));
-    `};
-  color: rgb(var(--light-color), 0.75);
-  & h1 {
-    font-size: 1.75rem;
+  justify-content: space-between;
+  padding-block: 0.5rem;
+  width: 90%;
+  margin-inline: auto;
+  color: rgba(var(--light-color));
+  & .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+    transition: 0.15s;
+    cursor: pointer;
     &:hover {
-      filter: drop-shadow(0 0 0.75rem rgb(var(--primary-color), 0.25));
-      color: rgb(var(--primary-color), 0.9);
+      color: rgba(var(--primary-color));
+    }
+    @media screen and (max-width: 50rem) {
+      display: none;
     }
   }
-  & a:hover {
-    text-decoration: none;
-  }
-  & ul {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    list-style: none;
+  & .menu {
+    @media screen and (max-width: 50rem) {
+      width: 100%;
+    }
     gap: 1rem;
-    font-weight: 500;
-    & li {
-      transition: 0.15s;
-      cursor: pointer;
-      &:hover {
-        filter: drop-shadow(0 0 0.75rem rgb(var(--primary-color)));
-        color: rgb(var(--primary-color), 0.9);
+    & ul {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      @media screen and (max-width: 50rem) {
+        flex-direction: column;
       }
-      &.special {
-        padding: 0.5rem 1.25rem;
-        border-radius: 2rem;
-        color: rgb(var(--white-color), 0.9);
-        background: rgb(var(--secondary-color));
+      & li {
+        list-style: none;
+        font-size: 1rem;
+        font-weight: 500;
+        text-transform: capitalize;
+        transition: 0.15s;
+        position: relative;
+        cursor: pointer;
         &:hover {
-          filter: drop-shadow(0 0 0.5rem rgb(var(--secondary-color), 0.5));
+          color: rgb(var(--primary-color));
+        }
+        &::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(var(--primary-color));
+          width: 0;
+          height: 0.1rem;
+          border-radius: 5rem;
+          transition: 0.15s;
+        }
+        &:hover::before {
+          width: 100%;
+        }
+        @media screen and (max-width: 50rem) {
+          font-size: 1.25rem;
+          text-align: center;
+          letter-spacing: 0.1rem;
+          background: rgba(var(--dark-color), 0.5);
+          backdrop-filter: blur(0.5rem);
+          padding: 0.75rem 1rem;
+          border-radius: 2rem;
+          width: 100%;
+        }
+        &.special {
+          background-color: rgb(var(--secondary-color));
+          border-radius: 5rem;
+          padding: 0.5rem 1.25rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid transparent;
           color: rgb(var(--white-color));
+          font-size: 1rem;
+          cursor: pointer;
+          transition: 0.15s;
+          &:hover {
+            box-shadow: rgba(var(--secondary-color), 0.5) 0 0 0.5rem;
+          }
+          @media screen and (max-width: 50rem) {
+            font-size: 1.25rem;
+            text-align: center;
+            letter-spacing: 0.1rem;
+            background: rgba(var(--secondary-color));
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            width: 100%;
+          }
+        }
+        &.special:hover::before {
+          width: 0;
         }
       }
     }
   }
 `;
 
+type NavbarType = {
+  menu?: boolean;
+  transparent?: boolean;
+};
+
+const StyledNavbar = styled.div<NavbarType>`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: all 0.15s;
+  @media screen and (max-width: 50rem) {
+    height: 100%;
+    padding-top: 4rem;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+  }
+  ${(props) =>
+    props.transparent &&
+    css`
+      background: rgb(var(--dark-color), 0.5);
+    `};
+  ${(props) =>
+    !props.menu
+      ? css`
+          @media screen and (max-width: 50rem) {
+            transform: translateX(-100%);
+          }
+        `
+      : css`
+          @media screen and (max-width: 50rem) {
+            backdrop-filter: blur(1rem);
+            background: rgb(var(--dark-color), 0.5);
+          }
+        `}
+`;
+
+const MobileNavbar = styled.nav<NavbarType>`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  color: rgba(var(--white-color));
+  backdrop-filter: blur(5px);
+  transition: all 0.15s;
+  transform: translateY(-100%);
+  font-size: 1.5rem;
+  padding-block: 0.5rem;
+  @media screen and (max-width: 50rem) {
+    transform: translateY(0);
+  }
+  ${(props) =>
+    props.transparent &&
+    css`
+      background: rgb(var(--dark-color), 0.5);
+    `};
+`;
+
 const PsuedoElement = styled.div`
   height: 5rem;
 `;
 
-const Navbar = () => {
-  const [scroll, setScroll] = useState(false);
+const Header = () => {
+  const [scroll, setScroll] = useState<boolean>(false);
+  const [menu, setMenu] = useState<boolean>(false);
   const { data: session } = useSession();
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -93,45 +202,55 @@ const Navbar = () => {
     ],
   };
   return (
-    <div>
-      <Nav transparent={scroll}>
-        <h1>
-          <Link href="/">{navbar.logo}</Link>
-        </h1>
-        <ul>
-          {navbar.links.map((link) => (
-            <li key={link.name}>
-              <Link href={link.path}>{link.name}</Link>
-            </li>
-          ))}
-          {!session ? (
-            <>
-              <li>
-                <Link href="/auth/signin">Sign In</Link>
-              </li>
-              <li className="special">
-                <Link href="/auth/register">Sign Up</Link>
-              </li>
-            </>
-          ) : (
-            <>
-              <li
-                onClick={() => {
-                  signOut();
-                }}
-              >
-                Logout
-              </li>
-              <li className="special">
-                <Link href="/dashboard">Dasboard</Link>
-              </li>
-            </>
-          )}
-        </ul>
-      </Nav>
+    <>
+      <StyledNavbar menu={menu} transparent={scroll}>
+        <Navbar>
+          <div className="logo">
+            <Link href="/">{navbar.logo}</Link>
+          </div>
+          <div className="menu">
+            <ul>
+              {navbar.links.map(({ name, path }, index) => (
+                <li key={index} onClick={() => setMenu(false)}>
+                  <Link href={path}>{name}</Link>
+                </li>
+              ))}
+              {!session ? (
+                <>
+                  <li onClick={() => setMenu(false)}>
+                    <Link href="/auth/signin">Sign In</Link>
+                  </li>
+                  <li className="special" onClick={() => setMenu(false)}>
+                    <Link href="/auth/register">Sign Up</Link>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li
+                    onClick={() => {
+                      signOut();
+                      setMenu(false);
+                    }}
+                  >
+                    Logout
+                  </li>
+                  <li className="special" onClick={() => setMenu(false)}>
+                    <Link href="/dashboard">Dasboard</Link>
+                  </li>
+                </>
+              )}
+            </ul>
+          </div>
+        </Navbar>
+      </StyledNavbar>
+      <MobileNavbar transparent={scroll}>
+        <div className="content container">
+          <FaHamburger onClick={() => setMenu(!menu)} />
+        </div>
+      </MobileNavbar>
       <PsuedoElement></PsuedoElement>
-    </div>
+    </>
   );
 };
 
-export default Navbar;
+export default Header;

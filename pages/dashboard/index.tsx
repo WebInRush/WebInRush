@@ -10,7 +10,6 @@ export default index;
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const session = await getSession({ req });
-  console.log(!session);
   return !session
     ? { redirect: { destination: "/auth/signin", permanent: false } }
     : { props: { session } };
