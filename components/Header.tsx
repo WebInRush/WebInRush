@@ -1,3 +1,4 @@
+import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
@@ -47,15 +48,10 @@ const Nav = styled.nav<Props>`
     font-weight: 500;
     & li {
       transition: 0.15s;
+      cursor: pointer;
       &:hover {
         filter: drop-shadow(0 0 0.75rem rgb(var(--primary-color)));
-      }
-      & a {
-        transition: 0.15s;
-        &:hover {
-          text-decoration: none;
-          color: rgb(var(--primary-color), 0.9);
-        }
+        color: rgb(var(--primary-color), 0.9);
       }
     }
   }
@@ -67,12 +63,11 @@ const PsuedoElement = styled.div`
 
 const Navbar = () => {
   const [scroll, setScroll] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
+  const { data: session } = useSession();
   useEffect(() => {
     window.addEventListener("scroll", () => {
       setScroll(window.scrollY > window.innerHeight * 0.1);
     });
-    setIsLogin(!!localStorage.getItem("authToken"));
   }, []);
   const navbar = {
     logo: "WebInRush",
@@ -99,7 +94,7 @@ const Navbar = () => {
               <Link href={link.path}>{link.name}</Link>
             </li>
           ))}
-          {!isLogin ? (
+          {!session ? (
             <>
               <li>
                 <Link href="/auth/register">Sign Up</Link>
@@ -110,8 +105,12 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <li>
-                <Link href="/logout">Logout</Link>
+              <li
+                onClick={() => {
+                  signOut();
+                }}
+              >
+                Logout
               </li>
               <li>
                 <Link href="/dasboard">DASHBOARD</Link>
