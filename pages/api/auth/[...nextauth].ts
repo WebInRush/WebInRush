@@ -4,6 +4,7 @@ import GitHubProvider from "next-auth/providers/github";
 require("dotenv").config();
 
 export const authOptions = {
+  secret: process.env.SECRET,
   providers: [
     GoogleProvider({
       clientId: (process.env.GOOGLE_CLIENT_ID as string) || "",
