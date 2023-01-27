@@ -15,6 +15,5 @@ const userSchema = new Schema({
     required: true,
   },
 });
-const User = mongoose.models.User || mongoose.model("User", userSchema);
-User.createIndexes();
-export default User;
+const Users = mongoose.models.Users || mongoose.model("Users", userSchema);
+export default Users;
