@@ -1,11 +1,13 @@
-import { useRouter } from "next/router";
 import Link from "next/link";
 import styled from "styled-components";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
-import axios, { AxiosError } from "axios";
 import Layout from "../layout/layout";
 import Button from "../../components/Button";
+import { useFormik } from "formik";
+import { signup_validate } from "../../lib/validate";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 const FormStyled = styled.form`
   padding: 3rem 2rem;
@@ -36,6 +38,9 @@ const FormStyled = styled.form`
     &:focus {
       border-bottom-color: rgb(var(--primary-color), 0.5);
     }
+    &.error {
+      border-color: rgb(220, 38, 38);
+    }
   }
   & > div {
     position: relative;
@@ -56,6 +61,23 @@ const FormStyled = styled.form`
         }
       }
     }
+    & span.errors {
+      position: absolute;
+      bottom: -1rem;
+      left: 0;
+      font-size: 0.75rem;
+      color: rgb(220, 38, 38);
+      display: inline-block;
+      height: 2.25rem;
+    }
+  }
+  & span.button {
+    width: 100%;
+  }
+  @media screen and (max-width: 50rem) {
+    & .button {
+      margin-top: 1.25rem;
+    }
   }
   & .ifExist {
     margin-top: 2rem;
@@ -69,57 +91,71 @@ const FormStyled = styled.form`
 `;
 
 const Register = () => {
-  const navigate = useRouter();
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("");
-  const [inputs, setInputs] = useState({
-    name: "",
-    email: "",
-    password: "",
+  const initialValues = { name: "", email: "", password: "" };
+  const onSubmit = async (values: {
+    name: string;
+    email: string;
+    password: string;
+  }) => {
+    console.log("hello world");
+    console.log(values);
+    axios
+      .post("/api/auth/signup", values)
+      .then(() => router.push("/dashboard"));
+  };
+  const formik = useFormik({
+    initialValues: initialValues,
+    validate: signup_validate,
+    onSubmit,
   });
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      await axios.post("/api/register", inputs);
-      navigate.push("/");
-    } catch (err) {
-      setError(
-        ((err as AxiosError)?.response?.data as string) ||
-          ((err as AxiosError)?.message as string)
-      );
-    }
-  };
   return (
     <Layout>
-      <FormStyled onSubmit={handleSubmit}>
+      <FormStyled onSubmit={formik.handleSubmit}>
         <h1>Register</h1>
-        <input
-          type="text"
-          placeholder="Name"
-          name="name"
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          name="email"
-          onChange={handleChange}
-          required
-        />
+        <div>
+          <input
+            type="text"
+            placeholder="Name"
+            autoComplete="on"
+            {...formik.getFieldProps("name")}
+            className={`${
+              formik.touched.name && formik.errors.name && "error"
+            }`}
+            required
+          />
+          {formik.touched.name && formik.errors.name && (
+            <span className="errors">{formik.errors.name}</span>
+          )}
+        </div>
+        <div>
+          <input
+            type="email"
+            placeholder="Email"
+            autoComplete="on"
+            {...formik.getFieldProps("email")}
+            className={`${
+              formik.touched.email && formik.errors.email && "error"
+            }`}
+            required
+          />
+          {formik.touched.email && formik.errors.email && (
+            <span className="errors">{formik.errors.email}</span>
+          )}
+        </div>
         <div>
           <input
             type={showPassword ? "text" : "password"}
             placeholder="Password"
             autoComplete="on"
-            name="password"
-            onChange={handleChange}
+            {...formik.getFieldProps("password")}
+            className={`${
+              formik.touched.password && formik.errors.password && "error"
+            }`}
             required
           />
-          {inputs.password != "" && (
+          {formik.values.password != "" && (
             <span>
               <FaEye
                 className={showPassword ? "hidden" : ""}
@@ -131,19 +167,23 @@ const Register = () => {
               />
             </span>
           )}
+          {formik.touched.password && formik.errors.password && (
+            <span className="errors">{formik.errors.password}</span>
+          )}
         </div>
-        <p style={{ color: "red" }}>
-          {error != "" &&
-            (() => {
-              setTimeout(() => {
-                setError("");
-              }, 5000);
-              return error;
-            })()}
-        </p>
-        <Button type="submit" bgColor="--primary-color">
-          Register
-        </Button>
+        <span
+          className="button"
+          // onClick={async (e) => {
+          //   e.preventDefault();
+          //   await axios
+          //     .post("/api/auth/signup", formik.values)
+          //     .then(() => router.push("/dashboard"));
+          // }}
+        >
+          <Button type="submit" bgColor="--primary-color">
+            Register
+          </Button>
+        </span>
         <div className="ifExist">
           <p>
             Don&apos;t have an account? <Link href="/auth/signin">Sign in</Link>

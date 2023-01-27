@@ -1,8 +1,5 @@
-import { useRouter } from "next/router";
 import styled from "styled-components";
-import { useState, useContext } from "react";
-import { AuthContext } from "../../context/authContext";
-import { AxiosError } from "axios";
+import { useState } from "react";
 import Link from "next/link";
 import Layout from "../layout/layout";
 import Button from "../../components/Button";
@@ -11,6 +8,9 @@ import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import { ImGithub } from "react-icons/im";
 import { BsFacebook } from "react-icons/bs";
+import { useFormik } from "formik";
+import { signin_validate } from "../../lib/validate";
+import { useRouter } from "next/router";
 
 const FormStyled = styled.form`
   padding: 3rem 2rem;
@@ -40,6 +40,9 @@ const FormStyled = styled.form`
     &:focus {
       border-bottom-color: rgb(var(--primary-color), 0.5);
     }
+    &.error {
+      border-color: rgb(220, 38, 38);
+    }
   }
   & > div {
     position: relative;
@@ -59,6 +62,23 @@ const FormStyled = styled.form`
           visibility: hidden;
         }
       }
+    }
+    & span.errors {
+      position: absolute;
+      bottom: -1rem;
+      left: 0;
+      font-size: 0.75rem;
+      color: rgb(220, 38, 38);
+      display: inline-block;
+      height: 2.25rem;
+    }
+  }
+  & span.button {
+    width: 100%;
+  }
+  @media screen and (max-width: 50rem) {
+    & .button {
+      margin-top: 1.25rem;
     }
   }
   & .ifExist {
@@ -81,57 +101,72 @@ const FormStyled = styled.form`
   }
 `;
 
-const Signin = () => {
-  const navigate = useRouter();
-  const { login } = useContext(AuthContext);
-  const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("");
-  const [inputs, setInputs] = useState({
-    email: "",
-    password: "",
-  });
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    login(inputs)
-      .then(() => navigate.push("/"))
-      .catch((err) =>
-        setError(
-          ((err as AxiosError)?.response?.data as string) ||
-            (err as AxiosError)?.message
-        )
-      );
-  };
+type MyFormValues = {
+  email?: string;
+  password?: string;
+};
 
+const Signin = () => {
+  const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
+  const initialValues: MyFormValues = { email: "", password: "" };
+  const onSubmit = async (values: { email?: string; password?: string }) => {
+    const status = await signIn("credentials", {
+      redirect: false,
+      email: values.email,
+      password: values.password,
+      callbackUrl: "/dashboard",
+    });
+    if (status?.ok) router.push("/dashboard");
+  };
+  const formik = useFormik({
+    initialValues: initialValues,
+    validate: signin_validate,
+    onSubmit,
+  });
   // google handler function
   async function handleGoogleLogin() {
     signIn("google", {
       callbackUrl: "/dashboard",
     });
   }
+  // github handler function
+  async function handleGithubLogin() {
+    signIn("github", {
+      callbackUrl: "/dashboard",
+    });
+  }
   return (
     <Layout>
-      <FormStyled onSubmit={handleSubmit}>
+      <FormStyled onSubmit={formik.handleSubmit}>
         <h1>Sign in</h1>
-        <input
-          type="email"
-          placeholder="Email"
-          name="email"
-          onChange={handleChange}
-          required
-        />
+        <div>
+          <input
+            type="email"
+            placeholder="Email"
+            autoComplete="on"
+            {...formik.getFieldProps("email")}
+            className={`${
+              formik.touched.email && formik.errors.email && "error"
+            }`}
+            required
+          />
+          {formik.touched.email && formik.errors.email && (
+            <span className="errors">{formik.errors.email}</span>
+          )}
+        </div>
         <div>
           <input
             type={showPassword ? "text" : "password"}
             placeholder="Password"
             autoComplete="on"
-            name="password"
-            onChange={handleChange}
+            {...formik.getFieldProps("password")}
+            className={`${
+              formik.touched.password && formik.errors.password && "error"
+            }`}
             required
           />
-          {inputs.password != "" && (
+          {formik.values.password !== "" && (
             <span>
               <FaEye
                 className={showPassword ? "hidden" : ""}
@@ -143,22 +178,29 @@ const Signin = () => {
               />
             </span>
           )}
+          {formik.touched.password && formik.errors.password && (
+            <span className="errors">{formik.errors.password}</span>
+          )}
         </div>
-        <p style={{ color: "red" }}>
-          {error != "" &&
-            (() => {
-              setTimeout(() => {
-                setError("");
-              }, 5000);
-              return error;
-            })()}
-        </p>
-        <Button type="submit" bgColor="--primary-color">
-          Sign in
-        </Button>
+        <span
+          className="button"
+          onClick={async (e) => {
+            const status = await signIn("credentials", {
+              redirect: false,
+              email: formik.values.email,
+              password: formik.values.password,
+              callbackUrl: "/dashboard",
+            });
+            if (status?.ok) router.push("/dashboard");
+          }}
+        >
+          <Button type="submit" bgColor="--primary-color">
+            Sign in
+          </Button>
+        </span>
         <div className="otherLogin">
-          <FcGoogle onClick={() => handleGoogleLogin()} size={35} />
-          <ImGithub size={35} />
+          <FcGoogle size={35} onClick={() => handleGoogleLogin()} />
+          <ImGithub size={35} onClick={() => handleGithubLogin()} />
           <BsFacebook size={35} />
         </div>
         <div className="ifExist">
