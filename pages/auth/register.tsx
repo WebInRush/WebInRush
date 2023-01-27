@@ -173,12 +173,12 @@ const Register = () => {
         </div>
         <span
           className="button"
-          // onClick={async (e) => {
-          //   e.preventDefault();
-          //   await axios
-          //     .post("/api/auth/signup", formik.values)
-          //     .then(() => router.push("/dashboard"));
-          // }}
+          onClick={async (e) => {
+            e.preventDefault();
+            await axios
+              .post("/api/auth/signup", formik.values)
+              .then(() => router.push("/dashboard"));
+          }}
         >
           <Button type="submit" bgColor="--primary-color">
             Register

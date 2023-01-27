@@ -23,6 +23,7 @@ const StyledButton = styled.button<ButtonProps>`
   border-radius: 0.25rem;
   font-size: 1rem;
   font-weight: 500;
+  cursor: pointer;
   transition: 0.15s;
   &:hover {
     filter: drop-shadow(0 0 0.75rem rgb(var(${(props) => props.bgColor}), 0.5));

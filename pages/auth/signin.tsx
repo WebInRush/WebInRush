@@ -186,9 +186,9 @@ const Signin = () => {
           className="button"
           onClick={async (e) => {
             const status = await signIn("credentials", {
-              redirect: false,
               email: formik.values.email,
               password: formik.values.password,
+              redirect: false,
               callbackUrl: "/dashboard",
             });
             if (status?.ok) router.push("/dashboard");

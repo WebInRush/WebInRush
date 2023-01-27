@@ -11,6 +11,7 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
+  jwt: {},
   secret: process.env.SECRET,
   providers: [
     GoogleProvider({
@@ -22,7 +23,7 @@ export const authOptions: NextAuthOptions = {
       clientSecret: (process.env.GITHUB_SECRET as string) || "",
     }),
     CredentialsProvider({
-      type: "credentials",
+      id: "credentials",
       credentials: {},
       authorize: async (credentials, _req) => {
         const { email, password } = credentials as {
@@ -33,16 +34,16 @@ export const authOptions: NextAuthOptions = {
           error: "Connection Failed!";
         });
         // check if user is logged in
-        const result = await Users.findOne({ email });
-        if (!result) {
-          throw new Error("User not found, PLease Sign Up!");
+        const user = await Users.findOne({ email });
+        if (!user) {
+          throw new Error("User not found, Please Sign Up!");
         }
         // check if password is correct
-        const checkPassword = await compare(password, result.password);
-        if (!checkPassword || result.password !== password) {
+        const checkPassword = await compare(password, user.password);
+        if (!checkPassword) {
           throw new Error("Invalid Credentials!");
         }
-        if (!!result) return result;
+        if (!!user) return user;
         return null;
       },
     }),
