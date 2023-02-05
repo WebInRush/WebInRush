@@ -2,7 +2,6 @@ import styled from "styled-components";
 import bg from "../public/images/background.webp";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 
 const Button = styled.button`
   padding: 1rem 2rem;
@@ -196,7 +195,6 @@ const Home = () => {
     "Express JS",
     "MongoDB / SQL",
   ];
-  const { data: session } = useSession();
   return (
     <>
       <HomeStyled>
@@ -205,7 +203,6 @@ const Home = () => {
             Build your <span className="blue-text">Next-Gen</span>
             <br />
             <span className="orange-text">Website</span> with us.
-            {session && <div>{session.user?.name}</div>}
           </h1>
           <Button>
             <Link href="/contact">Get Started</Link>

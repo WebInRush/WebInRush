@@ -8,6 +8,7 @@ import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import { ImGithub } from "react-icons/im";
 import { BsFacebook } from "react-icons/bs";
+import { AiFillLinkedin } from "react-icons/ai";
 import { useFormik } from "formik";
 import { signin_validate } from "../../lib/validate";
 import { useRouter } from "next/router";
@@ -136,6 +137,12 @@ const Signin = () => {
       callbackUrl: "/dashboard",
     });
   }
+  // linkedin handler function
+  async function handleLinkedinLogin() {
+    signIn("linkedin", {
+      callbackUrl: "/dashboard",
+    });
+  }
   return (
     <Layout>
       <FormStyled onSubmit={formik.handleSubmit}>
@@ -201,7 +208,7 @@ const Signin = () => {
         <div className="otherLogin">
           <FcGoogle size={35} onClick={() => handleGoogleLogin()} />
           <ImGithub size={35} onClick={() => handleGithubLogin()} />
-          <BsFacebook size={35} />
+          <AiFillLinkedin size={35} onClick={() => handleLinkedinLogin()} />
         </div>
         <div className="ifExist">
           <p>

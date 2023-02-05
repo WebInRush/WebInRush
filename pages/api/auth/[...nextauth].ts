@@ -1,6 +1,7 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
+import LinkedInProvider from "next-auth/providers/linkedin";
 import CredentialsProvider from "next-auth/providers/credentials";
 import connectMongoDB from "../../../database/connect";
 import Users from "../../../model/Schema";
@@ -21,6 +22,10 @@ export const authOptions: NextAuthOptions = {
     GitHubProvider({
       clientId: (process.env.GITHUB_ID as string) || "",
       clientSecret: (process.env.GITHUB_SECRET as string) || "",
+    }),
+    LinkedInProvider({
+      clientId: (process.env.LINKEDIN_ID as string) || "",
+      clientSecret: (process.env.LINKEDIN_SECRET as string) || "",
     }),
     CredentialsProvider({
       id: "credentials",
