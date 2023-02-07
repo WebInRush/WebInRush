@@ -117,7 +117,7 @@ type NavbarType = {
 };
 
 const StyledNavbar = styled.div<NavbarType>`
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
@@ -128,8 +128,8 @@ const StyledNavbar = styled.div<NavbarType>`
   flex-direction: column;
   transition: all 0.15s;
   @media screen and (max-width: 50rem) {
+    position: fixed;
     height: 100%;
-    padding-top: 4rem;
     flex-direction: column-reverse;
     justify-content: space-between;
   }
@@ -175,10 +175,6 @@ const MobileNavbar = styled.nav<NavbarType>`
     `};
 `;
 
-const PsuedoElement = styled.div`
-  height: 5rem;
-`;
-
 const Header = () => {
   const [scroll, setScroll] = useState<boolean>(false);
   const [menu, setMenu] = useState<boolean>(false);
@@ -217,11 +213,8 @@ const Header = () => {
               ))}
               {!session ? (
                 <>
-                  <li onClick={() => setMenu(false)}>
-                    <Link href="/auth/signin">Sign In</Link>
-                  </li>
                   <li className="special" onClick={() => setMenu(false)}>
-                    <Link href="/auth/register">Sign Up</Link>
+                    <Link href="/auth/signin">Sign In</Link>
                   </li>
                 </>
               ) : (
@@ -248,7 +241,6 @@ const Header = () => {
           <FaHamburger onClick={() => setMenu(!menu)} />
         </div>
       </MobileNavbar>
-      <PsuedoElement></PsuedoElement>
     </>
   );
 };

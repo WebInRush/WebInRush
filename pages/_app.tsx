@@ -1,6 +1,7 @@
 import Loading from "./loading";
 import Head from "next/head";
 import type { AppProps } from "next/app";
+import type { Page } from "../page";
 import { Poppins } from "@next/font/google";
 import { createGlobalStyle } from "styled-components";
 import { motion } from "framer-motion";
@@ -75,10 +76,11 @@ const container = {
   show: { opacity: 1 },
 };
 
-export default function App({
-  Component,
-  pageProps: { session, ...pageProps },
-}: AppProps) {
+type Props = AppProps & {
+  Component: Page;
+};
+
+const App = ({ Component, pageProps: { session, ...pageProps } }: Props) => {
   const [domLoaded, setDomLoaded] = useState<boolean>(false);
   useEffect(() => {
     setDomLoaded(true);
@@ -96,13 +98,15 @@ export default function App({
         {domLoaded && (
           <div className={poppins.variable}>
             <motion.div variants={container} initial="hidden" animate="show">
-              <Header />
+              {!Component.getLayout && <Header />}
               <Component {...pageProps} />
-              <Footer />
+              {!Component.getLayout && <Footer />}
             </motion.div>
           </div>
         )}
       </Suspense>
     </SessionProvider>
   );
-}
+};
+
+export default App;

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import bg from "../public/images/background.webp";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 const Button = styled.button`
   padding: 1rem 2rem;
@@ -22,10 +23,10 @@ const Button = styled.button`
 
 const HomeStyled = styled.div`
   position: relative;
-  top: -5rem;
   display: grid;
   place-items: center;
   min-height: 100vh;
+  top: -3.5rem;
   width: 100%;
   background-image: linear-gradient(
       to right,
@@ -36,6 +37,9 @@ const HomeStyled = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  @media screen and (max-width: 50rem) {
+    top: 0;
+  }
   & .content {
     display: flex;
     flex-direction: column;
@@ -96,8 +100,8 @@ const Category = styled.section`
         grid-column: 1 / 3;
       }
     }
-    @media screen and (max-width: 35rem) {
-      grid-template-columns: repeat(1, 1fr);
+    @media screen and (max-width: 40rem) {
+      grid-template-columns: 1fr;
     }
     & .card {
       width: 100%;
@@ -195,6 +199,8 @@ const Home = () => {
     "Express JS",
     "MongoDB / SQL",
   ];
+  const { data: session } = useSession();
+  console.log(session?.user?.email!);
   return (
     <>
       <HomeStyled>
