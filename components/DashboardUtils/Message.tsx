@@ -50,7 +50,7 @@ const Message = ({ chatMessage }: { chatMessage: Message }) => {
       <div className="message">
         <div className="title">
           <span>
-            {chatMessage.username === session?.user?.name
+            {chatMessage.email === session?.user?.email
               ? "You"
               : chatMessage.username}
           </span>
