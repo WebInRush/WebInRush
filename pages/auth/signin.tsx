@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Layout from "../layout/layout";
+import Layout from "../../layout/layout";
 import { signIn } from "next-auth/react";
 import google from "../../public/images/google.webp";
 import github from "../../public/images/github.webp";
@@ -33,12 +33,14 @@ const SigninStyled = styled.div`
         width: 150%;
         height: 150%;
         transform: translateY(150%);
-        background-color: rgb(var(--primary-color));
+        background-color: rgb(var(--dark-color));
         border-radius: 50%;
         transition: all 0.5s;
       }
       &:hover {
         border: 1px solid transparent;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+          rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
         &::before {
           transform: translateY(0);
         }
