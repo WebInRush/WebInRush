@@ -12,16 +12,16 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.SECRET,
   providers: [
     GoogleProvider({
-      clientId: (process.env.GOOGLE_ID as string) || "",
-      clientSecret: (process.env.GOOGLE_SECRET as string) || "",
+      clientId: process.env.GOOGLE_ID!,
+      clientSecret: process.env.GOOGLE_SECRET!,
     }),
     GitHubProvider({
-      clientId: (process.env.GITHUB_ID as string) || "",
-      clientSecret: (process.env.GITHUB_SECRET as string) || "",
+      clientId: process.env.GITHUB_ID!,
+      clientSecret: process.env.GITHUB_SECRET!,
     }),
     LinkedInProvider({
-      clientId: (process.env.LINKEDIN_ID as string) || "",
-      clientSecret: (process.env.LINKEDIN_SECRET as string) || "",
+      clientId: process.env.LINKEDIN_ID!,
+      clientSecret: process.env.LINKEDIN_SECRET!,
     }),
   ],
   pages: {

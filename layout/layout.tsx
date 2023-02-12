@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
-import thumbnail from "../../public/images/background.webp";
+import thumbnail from "../public/images/background.webp";
 
 const LayoutContainer = styled.div`
   min-height: 100vh;

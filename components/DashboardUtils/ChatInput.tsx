@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { IoMdSend } from "react-icons/io";
 import { v4 as uuid } from "uuid";
 import { Message } from "@/message";
-import axios from "axios";
 import { useSession } from "next-auth/react";
+import { db } from "@/firebase";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 const ChatForm = styled.footer`
   position: fixed;
@@ -53,9 +54,10 @@ const ChatForm = styled.footer`
   }
 `;
 
-const uploadMessageToUpstash = async (message: Message) => {
-  const { data } = await axios.post("/api/addMessage", { message });
-  console.log(data);
+const uploadMessage = async (message: Message) => {
+  await addDoc(collection(db, "messages"), {
+    message,
+  });
 };
 
 const ChatInput = () => {
@@ -70,12 +72,12 @@ const ChatInput = () => {
     const message: Message = {
       id,
       message: messageToSend,
-      createdAt: Date.now(),
+      createdAt: serverTimestamp(),
       username: session?.user?.name!,
       profilePic: session?.user?.image!,
       email: session?.user?.email!,
     };
-    uploadMessageToUpstash(message);
+    uploadMessage(message);
   };
   return (
     <ChatForm>
@@ -84,9 +86,10 @@ const ChatInput = () => {
           <input
             type="text"
             value={input}
+            title="Type a Message"
             onChange={(e) => setInput(e.target.value)}
           />
-          <button type="submit">
+          <button type="submit" title="Send Message">
             <IoMdSend />
           </button>
         </div>

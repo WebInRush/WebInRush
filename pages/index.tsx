@@ -2,7 +2,6 @@ import styled from "styled-components";
 import bg from "../public/images/background.webp";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 
 const Button = styled.button`
   padding: 1rem 2rem;
@@ -199,8 +198,6 @@ const Home = () => {
     "Express JS",
     "MongoDB / SQL",
   ];
-  const { data: session } = useSession();
-  console.log(session?.user?.email!);
   return (
     <>
       <HomeStyled>

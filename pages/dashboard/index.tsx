@@ -4,7 +4,6 @@ import MessageList from "@/components/DashboardUtils/MessageList";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import { ReactElement } from "react";
-
 const Dashboard = () => {
   return (
     <div>
