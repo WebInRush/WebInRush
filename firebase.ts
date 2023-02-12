@@ -1,13 +1,14 @@
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+require("dotenv").config();
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCjDZdVHq5DTOY3lFNPGHLie4vHSGcgpHA",
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "webinrush.firebaseapp.com",
   projectId: "webinrush",
   storageBucket: "webinrush.appspot.com",
-  messagingSenderId: "84632647662",
-  appId: "1:84632647662:web:41d28605bf7d9bd9a000ff",
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.FIREBASE_APP_ID,
   measurementId: "G-HSCJFEFRCN",
 };
 
