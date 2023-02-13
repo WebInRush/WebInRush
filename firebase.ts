@@ -3,12 +3,11 @@ import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: "webinrush.firebaseapp.com",
-  projectId: "webinrush",
-  storageBucket: "webinrush.appspot.com",
+  authDomain: "webinrush-f6536.firebaseapp.com",
+  projectId: "webinrush-f6536",
+  storageBucket: "webinrush-f6536.appspot.com",
   messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.FIREBASE_APP_ID,
-  measurementId: "G-HSCJFEFRCN",
 };
 
 const app = getApps().length ? getApp() : initializeApp(firebaseConfig);

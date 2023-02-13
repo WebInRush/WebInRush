@@ -22,7 +22,6 @@ const ChatStyle = styled.div<{ isUser?: boolean }>`
     border-radius: 0.75rem;
     font-size: 1.25rem;
     color: rgb(var(--dark-color), 0.75);
-    /* background: {({ isUser }) => (isUser ? "rgb(var(--primary-color))" : "rgb(var(--white-color), 0.75)")}; */
     background: ${({ isUser }) =>
       isUser ? "rgb(var(--primary-color))" : "rgb(var(--white-color), 0.75)"};
     & .title {
@@ -40,22 +39,22 @@ const ChatStyle = styled.div<{ isUser?: boolean }>`
 `;
 
 const Message = ({ chatMessage }: { chatMessage: Message }) => {
-  const date = new Date(chatMessage.createdAt?.seconds! * 1000);
+  const date = new Date(chatMessage?.createdAt?.seconds! * 1000);
   // check if the message is sent by the user
   const { data: session } = useSession();
-  const isUser = chatMessage.email === session?.user?.email!;
+  const isUser = chatMessage?.email === session?.user?.email!;
   return (
     <ChatStyle isUser={isUser}>
-      <img src={chatMessage.profilePic} alt={chatMessage.username} />
+      <img src={chatMessage.profilePic} alt={chatMessage?.username} />
       <div className="message">
         <div className="title">
           <span>
-            {chatMessage.email === session?.user?.email
+            {chatMessage?.email === session?.user?.email
               ? "You"
-              : chatMessage.username}
+              : chatMessage?.username}
           </span>
-          {chatMessage.email === "itsmesubid@gmail.com" &&
-            chatMessage.username === "SUBID DAS" && <span>Developer</span>}
+          {chatMessage?.email === "itsmesubid@gmail.com" &&
+            chatMessage?.username === "SUBID DAS" && <span>Developer</span>}
         </div>
         <p>{chatMessage?.message}</p>
         <span className="timeago">
