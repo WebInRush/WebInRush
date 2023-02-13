@@ -101,6 +101,9 @@ const Category = styled.section`
     }
     @media screen and (max-width: 40rem) {
       grid-template-columns: 1fr;
+      .business {
+        grid-column: auto;
+      }
     }
     & .card {
       width: 100%;
