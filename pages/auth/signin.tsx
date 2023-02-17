@@ -3,7 +3,6 @@ import Layout from "../../layout/layout";
 import { signIn } from "next-auth/react";
 import google from "../../public/images/google.webp";
 import github from "../../public/images/github.webp";
-import meta from "../../public/images/meta.webp";
 import Image from "next/image";
 
 const SigninStyled = styled.div`
@@ -65,12 +64,6 @@ const Signin = () => {
       callbackUrl: "/chat",
     });
   }
-  // linkedin handler function
-  async function handleLinkedinLogin() {
-    signIn("linkedin", {
-      callbackUrl: "/chat",
-    });
-  }
   const login = [
     {
       label: "google",
@@ -86,15 +79,7 @@ const Signin = () => {
       width: 60,
       height: 60,
     },
-    {
-      label: "meta",
-      function: handleLinkedinLogin,
-      image: meta.src,
-      width: 107,
-      height: 60,
-    },
   ];
-  console.log(meta.height, meta.width);
   return (
     <Layout>
       <SigninStyled>

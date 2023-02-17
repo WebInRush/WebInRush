@@ -1,7 +1,7 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
-import LinkedInProvider from "next-auth/providers/linkedin";
+
 require("dotenv").config();
 
 export const authOptions: NextAuthOptions = {
@@ -18,10 +18,6 @@ export const authOptions: NextAuthOptions = {
     GitHubProvider({
       clientId: process.env.GITHUB_ID!,
       clientSecret: process.env.GITHUB_SECRET!,
-    }),
-    LinkedInProvider({
-      clientId: process.env.LINKEDIN_ID!,
-      clientSecret: process.env.LINKEDIN_SECRET!,
     }),
   ],
   pages: {
