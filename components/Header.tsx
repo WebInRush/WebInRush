@@ -228,7 +228,7 @@ const Header = () => {
                     Logout
                   </li>
                   <li className="special" onClick={() => setMenu(false)}>
-                    <Link href="/dashboard">Dasboard</Link>
+                    <Link href="/chat">Chat</Link>
                   </li>
                 </>
               )}

@@ -7,8 +7,12 @@ import { useSession } from "next-auth/react";
 import { db } from "@/firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
-const ChatForm = styled.footer`
-  position: fixed;
+type StyleProps = {
+  isInfo: boolean;
+};
+
+const ChatForm = styled.footer<StyleProps>`
+  position: sticky;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -18,9 +22,10 @@ const ChatForm = styled.footer`
     padding: 1rem;
     margin-inline: auto;
     width: min(100%, 70rem);
-    border-radius: 2rem 2rem 0 0;
+    border-radius: ${({ isInfo }) => (!isInfo ? "2rem 2rem 0 0" : "0")};
     box-shadow: 0 -2px 5px rgb(var(--dark-color), 0.25);
     background-color: rgb(var(--secondary-color), 0.25);
+    transition: 0.15s;
     @media screen and (max-width: 70rem) {
       border-radius: 0;
       padding: 0.75rem;
@@ -37,6 +42,11 @@ const ChatForm = styled.footer`
         border-radius: 1rem;
         padding: 0.5rem 1rem;
         background-color: rgb(var(--white-color), 0.75);
+        color: rgb(var(--dark-color));
+        &::placeholder {
+          color: rgb(var(--dark-color), 0.5);
+          font-size: 1rem;
+        }
       }
       & button {
         display: flex;
@@ -60,7 +70,7 @@ const uploadMessage = async (message: Message) => {
   });
 };
 
-const ChatInput = () => {
+const ChatInput = ({ isInfo }: { isInfo: boolean }) => {
   const [input, setInput] = useState("");
   const { data: session } = useSession();
   const addMessage = (e: FormEvent<HTMLFormElement>) => {
@@ -80,12 +90,13 @@ const ChatInput = () => {
     uploadMessage(message);
   };
   return (
-    <ChatForm>
+    <ChatForm isInfo={isInfo}>
       <form onSubmit={addMessage}>
         <div className="form-control">
           <input
             type="text"
             value={input}
+            spellCheck="false"
             title="Type a Message"
             placeholder="Type a Message"
             onChange={(e) => setInput(e.target.value)}

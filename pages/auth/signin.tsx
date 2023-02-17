@@ -56,19 +56,19 @@ const Signin = () => {
   // google handler function
   async function handleGoogleLogin() {
     signIn("google", {
-      callbackUrl: "/dashboard",
+      callbackUrl: "/chat",
     });
   }
   // github handler function
   async function handleGithubLogin() {
     signIn("github", {
-      callbackUrl: "/dashboard",
+      callbackUrl: "/chat",
     });
   }
   // linkedin handler function
   async function handleLinkedinLogin() {
     signIn("linkedin", {
-      callbackUrl: "/dashboard",
+      callbackUrl: "/chat",
     });
   }
   const login = [
