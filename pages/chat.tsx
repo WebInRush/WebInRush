@@ -4,6 +4,7 @@ import Header from "@/components/chatUtils/Header";
 import MessageList from "@/components/chatUtils/MessageList";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
+import Head from "next/head";
 import { ReactElement, useState } from "react";
 import styled from "styled-components";
 
@@ -26,6 +27,9 @@ const Chat = () => {
   const [info, setInfo] = useState(false);
   return (
     <ChatStyle isInfo={info}>
+      <Head>
+        <title>Chat | WebInRush 🚀</title>
+      </Head>
       <div className="chat">
         <Header isInfo={info} setInfo={setInfo} />
         <MessageList />

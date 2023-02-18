@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Head from "next/head";
 import styled, { keyframes } from "styled-components";
 
 const animateBefore = keyframes`
@@ -87,6 +87,9 @@ const Refund = styled.div`
 const Index = () => {
   return (
     <Refund>
+      <Head>
+        <title>Refund Policy | WebInRush 🚀</title>
+      </Head>
       <div className="card container">
         <h1>Refund Policy</h1>
         <p>

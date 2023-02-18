@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Link from "next/link";
 import styled, { keyframes } from "styled-components";
 
@@ -87,6 +88,9 @@ const Terms = styled.div`
 const Index = () => {
   return (
     <Terms>
+      <Head>
+        <title>Terms of Service | WebInRush 🚀</title>
+      </Head>
       <div className="card container">
         <h1>📝 Terms of Service</h1>
         <p>

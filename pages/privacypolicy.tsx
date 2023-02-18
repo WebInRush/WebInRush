@@ -1,3 +1,4 @@
+import Head from "next/head";
 import styled, { keyframes } from "styled-components";
 
 const animateBefore = keyframes`
@@ -86,6 +87,9 @@ const Privacy = styled.div`
 const Index = () => {
   return (
     <Privacy>
+      <Head>
+        <title>Privacy Policy | WebInRush 🚀</title>
+      </Head>
       <div className="card container">
         <h1>🔒 WebInRush Privacy Policy</h1>
         <p>
