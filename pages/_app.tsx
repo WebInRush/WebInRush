@@ -100,6 +100,7 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: Props) => {
     <SessionProvider session={session}>
       <Head>
         <title>{og.title}</title>
+        <meta name="google-site-verification" content="aUOx7BZBGMEAbtDsLf9bN1BvycMZwahF4zDqu0EtQCw" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href={favicon.src} />
         <meta
