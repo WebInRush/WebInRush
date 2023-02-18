@@ -142,6 +142,10 @@ const FooterElement = styled.footer`
         gap: 0.5rem;
         cursor: pointer;
         transition: 0.15s;
+        @media screen and (max-width: 50rem) {
+          flex-direction: column;
+          margin-block: 1rem;
+        }
         & a:hover {
           color: rgb(var(--primary-color));
         }

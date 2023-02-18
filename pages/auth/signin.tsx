@@ -35,6 +35,7 @@ const SigninStyled = styled.div`
         transform: translateY(150%);
         background-color: rgb(var(--dark-color));
         border-radius: 50%;
+        z-index: 0;
         transition: all 0.5s;
       }
       &:hover {
@@ -44,6 +45,18 @@ const SigninStyled = styled.div`
         &::before {
           transform: translateY(0);
         }
+      }
+      &:active {
+        border: 1px solid rgb(var(--light-color), 0.5);
+      }
+      & img {
+        @media screen and (max-width: 50rem) {
+          width: 3rem;
+          height: 3rem;
+        }
+      }
+      & span.authenticator {
+        text-transform: capitalize;
       }
       & > * {
         z-index: 1;
@@ -94,7 +107,7 @@ const Signin = () => {
                 width={item.width}
               />
               <span>
-                Sign in with <span>{item.label}</span>
+                Sign in with <span className="authenticator">{item.label}</span>
               </span>
             </li>
           ))}

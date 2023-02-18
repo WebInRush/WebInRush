@@ -1,6 +1,6 @@
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
-import { MouseEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { FaHamburger } from "react-icons/fa";
 
@@ -122,8 +122,10 @@ const StyledNavbar = styled.div<NavbarType>`
   position: sticky;
   top: 0;
   left: 0;
-  width: 100%;
-  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 2;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -156,19 +158,24 @@ const StyledNavbar = styled.div<NavbarType>`
 `;
 
 const MobileNavbar = styled.nav<NavbarType>`
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1;
+  z-index: 2;
   color: rgba(var(--white-color));
   backdrop-filter: blur(5px);
   transition: all 0.15s;
   transform: translateY(-100%);
+  opacity: 0;
+  scale: 0;
   font-size: 1.5rem;
   padding-block: 0.5rem;
+  transition: 0.15s;
   @media screen and (max-width: 50rem) {
     transform: translateY(0);
+    opacity: 1;
+    scale: 1;
   }
   ${(props) =>
     props.transparent &&
@@ -237,11 +244,9 @@ const Header = () => {
                 </li>
               ))}
               {!session ? (
-                <>
-                  <li className="special" onClick={() => setMenu(false)}>
-                    <Link href="/auth/signin">Sign In</Link>
-                  </li>
-                </>
+                <li className="special" onClick={() => setMenu(false)}>
+                  <Link href="/auth/signin">Sign In</Link>
+                </li>
               ) : (
                 <>
                   <li

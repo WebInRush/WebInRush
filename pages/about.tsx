@@ -19,6 +19,9 @@ const animateAfter = keyframes`
 `;
 
 const About = styled.div`
+  position: relative;
+  width: 100vw;
+  overflow: hidden;
   margin-block: 2rem;
   &::before {
     content: "";
@@ -68,6 +71,9 @@ const About = styled.div`
       & h1 {
         font-size: 1.5rem;
       }
+    }
+    & p {
+      text-align: justify;
     }
   }
 `;

@@ -3,11 +3,11 @@ import styled from "styled-components";
 import thumbnail from "../public/images/background.webp";
 
 const LayoutContainer = styled.div`
-  min-height: 100vh;
+  min-height: 50vh;
   display: grid;
   place-items: center;
-  @media screen and (min-width: 50rem) {
-    min-height: 70vh;
+  @media screen and (max-width: 50rem) {
+    min-height: 90vh;
   }
   & > div {
     margin-inline: auto;
@@ -46,9 +46,15 @@ const Thumbnail = styled.div`
       rgb(var(--dark-color), 0.8)
     ),
     url(${thumbnail.src});
+  @media screen and (max-width: 50rem) {
+    padding-top: 6rem;
+  }
   & > h1 {
     font-size: 3.5rem;
     font-weight: 600;
+    @media screen and (max-width: 50rem) {
+      font-size: 2.5rem;
+    }
   }
   & .description p {
     text-align: justify;

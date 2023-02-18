@@ -19,6 +19,9 @@ const animateAfter = keyframes`
 `;
 
 const Refund = styled.div`
+  position: relative;
+  width: 100vw;
+  overflow: hidden;
   margin-block: 2rem;
   &::before {
     content: "";
@@ -80,6 +83,9 @@ const Refund = styled.div`
         list-style: disc;
         padding-inline-start: 2rem;
       }
+    }
+    & p {
+      text-align: justify;
     }
   }
 `;

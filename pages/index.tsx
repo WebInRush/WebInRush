@@ -8,7 +8,7 @@ const HomeStyled = styled.div`
   display: grid;
   place-items: center;
   min-height: 100vh;
-  top: -3.5rem;
+  top: -7rem;
   width: 100%;
   background-image: linear-gradient(
       to right,
@@ -20,7 +20,7 @@ const HomeStyled = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   @media screen and (max-width: 50rem) {
-    top: 0;
+    top: -3rem;
   }
   & .content {
     display: flex;
