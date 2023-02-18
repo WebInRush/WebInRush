@@ -1,6 +1,6 @@
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { FaHamburger } from "react-icons/fa";
 
@@ -20,6 +20,7 @@ const Navbar = styled.nav`
     font-size: 1.5rem;
     font-weight: 600;
     letter-spacing: 0.05rem;
+    text-transform: uppercase;
     transition: 0.15s;
     cursor: pointer;
     &:hover {
@@ -73,6 +74,7 @@ const Navbar = styled.nav`
           text-align: center;
           letter-spacing: 0.1rem;
           background: rgba(var(--dark-color), 0.5);
+          -webkit-backdrop-filter: blur(0.5rem);
           backdrop-filter: blur(0.5rem);
           padding: 0.75rem 1rem;
           border-radius: 2rem;
@@ -178,6 +180,7 @@ const MobileNavbar = styled.nav<NavbarType>`
 const Header = () => {
   const [scroll, setScroll] = useState<boolean>(false);
   const [menu, setMenu] = useState<boolean>(false);
+  const [logo, setLogo] = useState("WebInRush");
   const { data: session } = useSession();
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -185,7 +188,7 @@ const Header = () => {
     });
   }, []);
   const navbar = {
-    logo: "WebInRush",
+    logo,
     links: [
       {
         name: "Home",
@@ -197,12 +200,34 @@ const Header = () => {
       },
     ],
   };
+  const mouseOver = (): void => {
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let iterations = 0;
+    let original = "WebInRush";
+    const interval = setInterval(() => {
+      setLogo((prev) =>
+        prev
+          .split("")
+          .map((letter, index) => {
+            if (index < iterations) {
+              return original[index];
+            }
+            return letters[Math.floor(Math.random() * 26)];
+          })
+          .join("")
+      );
+      if (iterations >= original.length) clearInterval(interval);
+      iterations += 1 / 3;
+    }, 30);
+  };
   return (
     <>
       <StyledNavbar menu={menu} transparent={scroll}>
         <Navbar>
           <div className="logo">
-            <Link href="/">{navbar.logo}</Link>
+            <Link href="/" onMouseOver={mouseOver}>
+              {navbar.logo}
+            </Link>
           </div>
           <div className="menu">
             <ul>

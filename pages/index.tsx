@@ -3,23 +3,6 @@ import bg from "../public/images/background.webp";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import Link from "next/link";
 
-const Button = styled.button`
-  padding: 1rem 2rem;
-  border: none;
-  background-color: rgb(var(--primary-color));
-  color: rgb(var(--dark-color));
-  border-radius: 2.25rem;
-  font-size: 1rem;
-  font-weight: 500;
-  font-weight: 600;
-  letter-spacing: 0.05rem;
-  transition: 0.15s;
-  &:hover {
-    filter: drop-shadow(0 0 0.75rem rgb(var(--primary-color), 0.5));
-    padding: 1rem 2.5rem;
-  }
-`;
-
 const HomeStyled = styled.div`
   position: relative;
   display: grid;
@@ -44,31 +27,77 @@ const HomeStyled = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    gap: 1.5rem;
-    & h1 span {
-      &.blue-text {
-        background: linear-gradient(
-          200deg,
-          rgb(var(--secondary-color)) 30%,
-          rgb(var(--secondary-gradient-1)) 60%,
-          rgb(var(--white-color), 0.5)
-        );
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-size: larger;
+    gap: 1rem;
+    & h1 {
+      @media screen and (max-width: 50rem) {
+        font-size: 1.5rem;
       }
-      &.orange-text {
-        background: linear-gradient(
-          15deg,
-          rgb(var(--primary-color)) 30%,
-          rgb(var(--primary-gradient-1)) 60%,
-          rgb(var(--white-color), 0.5)
-        );
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-size: larger;
+      & span {
+        &.blue-text {
+          background: linear-gradient(
+            200deg,
+            rgb(var(--secondary-color)) 30%,
+            rgb(var(--secondary-gradient-1)) 60%,
+            rgb(var(--white-color), 0.5)
+          );
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          font-size: larger;
+        }
+        &.orange-text {
+          background: linear-gradient(
+            15deg,
+            rgb(var(--primary-color)) 30%,
+            rgb(var(--primary-gradient-1)) 60%,
+            rgb(var(--white-color), 0.5)
+          );
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          font-size: larger;
+        }
+      }
+    }
+    & a {
+      display: flex;
+      align-items: center;
+      & button {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 2rem;
+        color: rgb(var(--white-color));
+        background-color: rgb(var(--dark-color));
+        border: 1px solid rgb(var(--light-color), 0.25);
+        border-radius: 5rem;
+        cursor: pointer;
+        transition: color 0.15s;
+        &::before {
+          content: "";
+          position: absolute;
+          width: 150%;
+          height: 300%;
+          rotate: 45deg;
+          transform: translateY(75%);
+          background-color: rgb(var(--white-color));
+          transition: all 0.5s;
+        }
+        &:hover {
+          border: 1px solid transparent;
+          box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+            rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+          color: rgb(var(--dark-color));
+          &::before {
+            transform: translateY(0);
+          }
+        }
+        & > * {
+          z-index: 1;
+        }
       }
     }
   }
@@ -79,6 +108,9 @@ const Category = styled.section`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  @media screen and (max-width: 50rem) {
+    margin-block: 3.5rem;
+  }
   & h2 {
     color: rgb(var(--white-color));
     font-size: 3rem;
@@ -156,23 +188,29 @@ const Category = styled.section`
           }
         }
       }
-      & button {
-        padding: 0.5rem 1rem;
-        background-color: rgb(var(--white-color));
-        color: rgb(var(--dark-color));
-        border: 2px solid transparent;
-        border-radius: 2.25rem;
-        font-size: 0.875rem;
-        font-weight: 600;
-        letter-spacing: 0.05rem;
-        cursor: pointer;
-        transition: 0.15s;
-        &:hover {
-          background-color: transparent;
-          color: rgb(var(--white-color));
-          border: 2px solid rgb(var(--white-color));
-          box-shadow: rgb(var(--white-color), 0.25) 0 0.25rem 1rem;
-          padding: 0.5rem 1.5rem;
+      & a {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        & button {
+          width: 100%;
+          padding: 0.5rem 1rem;
+          background-color: rgb(var(--white-color));
+          color: rgb(var(--dark-color));
+          border: 2px solid transparent;
+          border-radius: 2.25rem;
+          font-size: 0.875rem;
+          font-weight: 600;
+          letter-spacing: 0.05rem;
+          cursor: pointer;
+          transition: 0.15s;
+          &:hover {
+            background-color: transparent;
+            color: rgb(var(--white-color));
+            border: 2px solid rgb(var(--white-color));
+            box-shadow: rgb(var(--white-color), 0.25) 0 0.25rem 1rem;
+            padding: 0.5rem 1.5rem;
+          }
         }
       }
       & .attr {
@@ -201,18 +239,33 @@ const Home = () => {
     "Express JS",
     "MongoDB / SQL",
   ];
+  if (typeof window !== "undefined") {
+    const panel = document.querySelector("#panel") as HTMLElement;
+    if (panel) {
+      document.body.onpointermove = (event) => {
+        const { clientX, clientY } = event;
+        panel.style.transform = `translate(${clientX / 30}px, ${
+          clientY / 30
+        }px)`;
+      };
+    }
+  }
   return (
     <>
       <HomeStyled>
         <div className="content container">
-          <h1>
-            Build your <span className="blue-text">Next-Gen</span>
-            <br />
-            <span className="orange-text">Website</span> with us.
-          </h1>
-          <Button>
-            <Link href="/contact">Get Started</Link>
-          </Button>
+          <span id="panel">
+            <h1>
+              Build your <span className="blue-text">Next-Gen</span>
+              <br />
+              <span className="orange-text">Website</span> with us.
+            </h1>
+            <Link href="/chat">
+              <button title="Chat with us">
+                <span>Get Started</span>
+              </button>
+            </Link>
+          </span>
         </div>
       </HomeStyled>
       <Category className="container">
@@ -228,7 +281,9 @@ const Home = () => {
                 </li>
               ))}
             </ul>
-            <button>Get Started</button>
+            <Link href="/chat">
+              <button title="Chat with us">Get Started</button>
+            </Link>
           </div>
           <div className="portfolio card">
             <div className="attr">
@@ -246,7 +301,9 @@ const Home = () => {
                 </li>
               ))}
             </ul>
-            <button>Get Started</button>
+            <Link href="/chat">
+              <button title="Chat with us">Get Started</button>
+            </Link>
           </div>
           <div className="business card">
             <h3>Business</h3>
@@ -261,7 +318,9 @@ const Home = () => {
                 </li>
               ))}
             </ul>
-            <button>Get Started</button>
+            <Link href="/chat">
+              <button title="Chat with us">Get Started</button>
+            </Link>
           </div>
         </div>
       </Category>

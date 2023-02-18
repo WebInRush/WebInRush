@@ -106,9 +106,11 @@ const AboutStyle = styled.div<{ isInfo: boolean }>`
     }
   }
   & .team {
-    width: 80%;
     margin: 1rem auto;
     & h2 {
+      display: flex;
+      width: 80%;
+      margin-inline: auto;
       font-size: 0.8rem;
       color: rgb(var(--white-color), 0.75);
       font-weight: 500;
@@ -117,33 +119,41 @@ const AboutStyle = styled.div<{ isInfo: boolean }>`
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      margin-top: 1rem;
-      & .member {
-        display: flex;
-        gap: 0.5rem;
-        cursor: pointer;
-        & img {
-          width: 2.5rem;
-          height: 2.5rem;
-          border-radius: 50%;
+      margin-block: 0.5rem;
+      & a {
+        padding-block: 0.5rem;
+        &:hover {
+          background: rgb(var(--black-color), 0.15);
         }
-        & p {
+        & .member {
           display: flex;
-          justify-content: center;
-          flex-direction: column;
-          font-size: 1rem;
-          color: rgb(var(--white-color), 0.75);
-          & span {
-            &.name {
-              font-weight: 500;
-            }
-            &.about {
-              font-size: 0.9rem;
-              color: rgb(var(--white-color), 0.5);
-              display: -webkit-box;
-              -webkit-line-clamp: 1;
-              -webkit-box-orient: vertical;
-              overflow: hidden;
+          width: 80%;
+          margin-inline: auto;
+          gap: 0.5rem;
+          cursor: pointer;
+          & img {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+          }
+          & p {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            font-size: 1rem;
+            color: rgb(var(--white-color), 0.75);
+            & span {
+              &.name {
+                font-weight: 500;
+              }
+              &.about {
+                font-size: 0.9rem;
+                color: rgb(var(--white-color), 0.5);
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+              }
             }
           }
         }

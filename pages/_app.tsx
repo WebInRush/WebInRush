@@ -27,6 +27,7 @@ const GlobalStyle = createGlobalStyle`
   --secondary-color: 33, 158, 188;
   --secondary-gradient-1: 142, 202, 230;
   --white-color: 255, 255, 255;
+  --black-color: 0, 0, 0;
 }
 * {
   margin: 0;

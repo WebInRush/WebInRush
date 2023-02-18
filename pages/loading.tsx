@@ -8,6 +8,7 @@ const Loading = styled.div`
   width: 100%;
   height: 100%;
   background: rgba(var(--dark-color), 0.5);
+  -webkit-backdrop-filter: blur(0.5rem);
   backdrop-filter: blur(0.5rem);
   z-index: 999;
   display: flex;

@@ -119,6 +119,7 @@ const HeaderStyled = styled.header<StyleProps>`
     transition: 0.15s;
     transform: translateY(-0.5rem);
     pointer-events: none;
+    cursor: pointer;
     transform-origin: top right;
     &.active {
       opacity: 1;

@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import Layout from "../../layout/layout";
-import { signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 import google from "../../public/images/google.webp";
 import github from "../../public/images/github.webp";
 import Image from "next/image";
+import { GetServerSideProps } from "next";
 
 const SigninStyled = styled.div`
   padding: 3rem;
@@ -104,3 +105,10 @@ const Signin = () => {
 };
 
 export default Signin;
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const session = await getSession({ req });
+  return !!session
+    ? { redirect: { destination: "/chat", permanent: false } }
+    : { props: { session } };
+};
