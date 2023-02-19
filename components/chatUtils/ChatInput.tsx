@@ -1,4 +1,4 @@
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import styled from "styled-components";
 import { IoMdSend } from "react-icons/io";
 import { v4 as uuid } from "uuid";
@@ -7,11 +7,7 @@ import { useSession } from "next-auth/react";
 import { db } from "@/firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
-type StyleProps = {
-  isInfo: boolean;
-};
-
-const ChatForm = styled.footer<StyleProps>`
+const ChatForm = styled.footer`
   position: sticky;
   bottom: 0;
   left: 0;
@@ -21,8 +17,7 @@ const ChatForm = styled.footer<StyleProps>`
     align-items: center;
     padding: 1rem;
     margin-inline: auto;
-    width: min(100%, 70rem);
-    border-radius: ${({ isInfo }) => (!isInfo ? "2rem 2rem 0 0" : "0")};
+    width: 100%;
     box-shadow: 0 -2px 5px rgb(var(--dark-color), 0.25);
     background-color: rgb(var(--secondary-color), 0.25);
     transition: 0.15s;
@@ -70,7 +65,7 @@ const uploadMessage = async (message: Message) => {
   });
 };
 
-const ChatInput = ({ isInfo }: { isInfo: boolean }) => {
+const ChatInput = () => {
   const [input, setInput] = useState("");
   const { data: session } = useSession();
   const addMessage = (e: FormEvent<HTMLFormElement>) => {
@@ -89,11 +84,19 @@ const ChatInput = ({ isInfo }: { isInfo: boolean }) => {
     };
     uploadMessage(message);
   };
+  useEffect(() => {
+    // scroll to bottom
+    if (session) {
+      const messageInput = document.getElementById("messageInput");
+      messageInput?.focus();
+    }
+  }, [session]);
   return (
-    <ChatForm isInfo={isInfo}>
+    <ChatForm>
       <form onSubmit={addMessage}>
         <div className="form-control">
           <input
+            id="messageInput"
             type="text"
             value={input}
             spellCheck="false"

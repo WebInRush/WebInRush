@@ -33,7 +33,7 @@ const Chat = () => {
       <div className="chat">
         <Header isInfo={info} setInfo={setInfo} />
         <MessageList />
-        <ChatInput isInfo={info} />
+        <ChatInput />
       </div>
       <About isInfo={info} setInfo={setInfo} />
     </ChatStyle>

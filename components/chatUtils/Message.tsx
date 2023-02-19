@@ -109,7 +109,13 @@ const Message = ({ chatMessage }: { chatMessage: Message }) => {
         <p>{chatMessage?.message}</p>
         <span className="time">
           <span>
-            {date?.getHours()}:{date?.getMinutes()}
+            {date?.getHours() < 10
+              ? "0" + date?.getHours().toString()
+              : date?.getHours().toString()}
+            :
+            {date?.getMinutes() < 10
+              ? "0" + date?.getMinutes().toString()
+              : date?.getMinutes().toString()}
           </span>
         </span>
         {date && (

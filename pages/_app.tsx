@@ -29,6 +29,7 @@ const GlobalStyle = createGlobalStyle`
   --secondary-gradient-1: 142, 202, 230;
   --white-color: 255, 255, 255;
   --black-color: 0, 0, 0;
+  scroll-behavior: smooth;
 }
 * {
   margin: 0;
@@ -41,7 +42,6 @@ body {
   background-color: rgb(var(--dark-color));
   color: rgb(var(--light-color));
   overflow-x: hidden;
-  scroll-behavior: smooth;
   transition: all 0.15s ease;
 }
 .container {
@@ -100,7 +100,10 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: Props) => {
     <SessionProvider session={session}>
       <Head>
         <title>{og.title}</title>
-        <meta name="google-site-verification" content="aUOx7BZBGMEAbtDsLf9bN1BvycMZwahF4zDqu0EtQCw" />
+        <meta
+          name="google-site-verification"
+          content="aUOx7BZBGMEAbtDsLf9bN1BvycMZwahF4zDqu0EtQCw"
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href={favicon.src} />
         <meta

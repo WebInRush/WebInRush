@@ -8,11 +8,10 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { useRouter } from "next/router";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { db } from "@/firebase";
-import { collection } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs, query } from "firebase/firestore";
 
 type StyleProps = {
   isMore: boolean;
-  isInfo: boolean;
 };
 
 type HeaderProps = {
@@ -30,10 +29,9 @@ const HeaderStyled = styled.header<StyleProps>`
   gap: 1rem;
   padding: 1rem;
   margin-inline: auto;
-  width: min(100%, 70rem);
+  width: 100%;
   background-color: rgb(var(--secondary-color), 0.25);
   color: rgb(var(--white-color));
-  border-radius: ${({ isInfo }) => (!isInfo ? "0 0 2rem 2rem" : "0")};
   box-shadow: 0 2px 5px rgb(var(--dark-color), 0.25);
   z-index: 2;
   transition: 0.15s;
@@ -152,7 +150,7 @@ const Header = ({ isInfo, setInfo }: HeaderProps) => {
   const [more, setMore] = useState(false);
   const router = useRouter();
   return (
-    <HeaderStyled isMore={more} isInfo={isInfo}>
+    <HeaderStyled isMore={more}>
       <div className="left" onClick={() => setInfo(true)}>
         <Image src={webinrush.src} alt="" width={50} height={50} />
         <div className="conversation-info-header">
@@ -178,10 +176,34 @@ const Header = ({ isInfo, setInfo }: HeaderProps) => {
         </span>
       </div>
       <div className={`more-menu ${more && "active"}`}>
-        <div className="menu-item" onClick={() => router.push("/")}>
+        <div
+          className="menu-item"
+          onClick={async () => {
+            setMore(!more);
+            const messages = await getDocs(query(collection(db, "messages")));
+            messages.forEach(async (message) => {
+              await deleteDoc(doc(db, "messages", message.id));
+            });
+          }}
+        >
+          Delete conversation
+        </div>
+        <div
+          className="menu-item"
+          onClick={() => {
+            setMore(!more);
+            router.push("/");
+          }}
+        >
           Leave conversation
         </div>
-        <div className="menu-item" onClick={() => signOut()}>
+        <div
+          className="menu-item"
+          onClick={() => {
+            setMore(!more);
+            signOut();
+          }}
+        >
           Sign out
         </div>
       </div>

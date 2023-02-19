@@ -43,14 +43,21 @@ const Navbar = styled.nav`
       @media screen and (max-width: 50rem) {
         flex-direction: column;
       }
+      & > a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
       & li {
         list-style: none;
         font-size: 1rem;
         font-weight: 500;
         text-transform: capitalize;
-        transition: 0.15s;
+        white-space: nowrap;
         position: relative;
         cursor: pointer;
+        transition: 0.15s;
         &:hover {
           color: rgb(var(--primary-color));
         }
@@ -68,6 +75,9 @@ const Navbar = styled.nav`
         }
         &:hover::before {
           width: 100%;
+          @media screen and (max-width: 50rem) {
+            width: 0;
+          }
         }
         @media screen and (max-width: 50rem) {
           font-size: 1.25rem;
@@ -182,6 +192,9 @@ const MobileNavbar = styled.nav<NavbarType>`
     css`
       background: rgb(var(--dark-color), 0.5);
     `};
+  & .content {
+    cursor: pointer;
+  }
 `;
 
 const Header = () => {
@@ -239,9 +252,11 @@ const Header = () => {
           <div className="menu">
             <ul>
               {navbar.links.map(({ name, path }, index) => (
-                <li key={index} onClick={() => setMenu(false)}>
-                  <Link href={path}>{name}</Link>
-                </li>
+                <Link href={path} key={index}>
+                  <li key={index} onClick={() => setMenu(false)}>
+                    {name}
+                  </li>
+                </Link>
               ))}
               {!session ? (
                 <li className="special" onClick={() => setMenu(false)}>
@@ -267,8 +282,8 @@ const Header = () => {
         </Navbar>
       </StyledNavbar>
       <MobileNavbar transparent={scroll}>
-        <div className="content container">
-          <FaHamburger onClick={() => setMenu(!menu)} />
+        <div className="content container" onClick={() => setMenu(!menu)}>
+          <FaHamburger />
         </div>
       </MobileNavbar>
     </>

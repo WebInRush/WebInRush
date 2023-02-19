@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Message from "./Message";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en.json";
+import { useEffect } from "react";
 
 TimeAgo.addLocale(en);
 
@@ -15,11 +16,11 @@ const ChatsStyle = styled.div`
   gap: 1.75rem;
   padding: 1rem 0 2rem 0;
   margin: auto;
-  width: min(100%, 70rem);
-  height: 80vh;
+  width: 100%;
+  height: calc(100vh - 10.1rem);
   overflow-y: auto;
   @media screen and (max-width: 50rem) {
-    height: 82vh;
+    height: calc(100vh - 9.6rem);
   }
   &::-webkit-scrollbar {
     width: 0.5rem;
@@ -37,16 +38,25 @@ const ChatsStyle = styled.div`
 
 const MessageList = () => {
   const { data: session } = useSession();
-  const [messages, loading, error] = useCollection(
-    session && collection(db, "messages")
-  );
-  const chats = messages?.docs?.map((doc) => doc.data().message!);
+  const [messages] = useCollection(session && collection(db, "messages"));
+  const chats = messages?.docs?.map((doc) => ({
+    ...doc.data().message,
+    id: doc.id,
+  }));
   // sort message by createdAt
   chats?.sort((a, b) => b.createdAt?.seconds! - a.createdAt?.seconds!);
+  useEffect(() => {
+    // scroll to bottom
+    if (chats?.length) {
+      const chat = document.querySelector(".chats");
+      chat?.scrollTo(0, chat.scrollHeight);
+    }
+  }, [chats?.length]);
+
   return (
-    <ChatsStyle>
-      {chats?.map((chat, index) => (
-        <Message key={index} chatMessage={chat} />
+    <ChatsStyle className="chats">
+      {chats?.reverse()?.map((chat) => (
+        <Message key={chat.id} data-id={chat.id} chatMessage={chat} />
       ))}
     </ChatsStyle>
   );
