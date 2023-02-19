@@ -123,8 +123,6 @@ const StyledNavbar = styled.div<NavbarType>`
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
-  overflow: hidden;
   z-index: 2;
   display: flex;
   justify-content: center;
@@ -132,6 +130,8 @@ const StyledNavbar = styled.div<NavbarType>`
   flex-direction: column;
   transition: all 0.15s;
   @media screen and (max-width: 50rem) {
+    height: 100vh;
+    overflow: hidden;
     position: fixed;
     height: 100%;
     flex-direction: column-reverse;
