@@ -56,7 +56,7 @@ const MessageList = () => {
   return (
     <ChatsStyle className="chats">
       {chats?.reverse()?.map((chat) => (
-        <Message key={chat.id} data-id={chat.id} chatMessage={chat} />
+        <Message key={chat.id} id={chat.id} chatMessage={chat} />
       ))}
     </ChatsStyle>
   );
