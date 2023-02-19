@@ -131,6 +131,7 @@ const ChatStyle = styled.div<{ isUser?: boolean; isDetails?: boolean }>`
     transition: 0.15s;
     transform: translateY(-0.5rem);
     pointer-events: none;
+    z-index: 1;
     cursor: pointer;
     transform-origin: top right;
     &.active {
