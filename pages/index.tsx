@@ -96,7 +96,7 @@ const HomeStyled = styled.div`
           }
         }
         & > * {
-          z-index: 0.5;
+          z-index: 1;
         }
       }
     }
