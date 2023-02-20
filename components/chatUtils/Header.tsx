@@ -143,10 +143,16 @@ const HeaderStyled = styled.header<StyleProps>`
 
 const Header = ({ isInfo, setInfo }: HeaderProps) => {
   const { data: session } = useSession();
-  const [team, loading, error] = useCollection(
-    session && collection(db, "team")
+  const [team] = useCollection(session && collection(db, "team"));
+  const members = team?.docs
+    ?.map((doc) => doc.data().members!)
+    .map((member) => {
+      const { name, email } = member[0];
+      return { name, email };
+    });
+  const isDeveloper = members?.find(
+    (member) => member.email === session?.user?.email
   );
-  const members = team?.docs?.map((doc) => doc.data().members!);
   const [more, setMore] = useState(false);
   const router = useRouter();
   return (
@@ -157,7 +163,7 @@ const Header = ({ isInfo, setInfo }: HeaderProps) => {
           <div className="company-name">WEBINRUSH</div>
           <div className="subtitle">
             {members?.map((member, index) => {
-              const { name } = member[0];
+              const { name } = member;
               return (
                 <span className="name" title={name} key={index}>
                   {name}
@@ -176,18 +182,20 @@ const Header = ({ isInfo, setInfo }: HeaderProps) => {
         </span>
       </div>
       <div className={`more-menu ${more && "active"}`}>
-        <div
-          className="menu-item"
-          onClick={async () => {
-            setMore(!more);
-            const messages = await getDocs(query(collection(db, "messages")));
-            messages.forEach(async (message) => {
-              await deleteDoc(doc(db, "messages", message.id));
-            });
-          }}
-        >
-          Delete conversation
-        </div>
+        {!!isDeveloper && (
+          <div
+            className="menu-item"
+            onClick={async () => {
+              setMore(!more);
+              const messages = await getDocs(query(collection(db, "messages")));
+              messages.forEach(async (message) => {
+                await deleteDoc(doc(db, "messages", message.id));
+              });
+            }}
+          >
+            Delete conversation
+          </div>
+        )}
         <div
           className="menu-item"
           onClick={() => {

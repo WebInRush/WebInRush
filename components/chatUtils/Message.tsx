@@ -115,7 +115,7 @@ const ChatStyle = styled.div<{ isUser?: boolean; isDetails?: boolean }>`
   & .more-menu {
     position: absolute;
     top: 75%;
-    right: 4rem;
+    ${({ isUser }) => (isUser ? "right: 4rem" : "left: 6rem")};
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -174,6 +174,9 @@ const Message = ({ chatMessage, id }: { chatMessage: Message; id: string }) => {
   const isDeveloper = members?.find(
     (member) => member.email === chatMessage?.email
   );
+  const isCurrentUserDeveloper = members?.find(
+    (member) => member.email === session?.user?.email
+  );
   return (
     <ChatStyle isUser={isUser} isDetails={details}>
       {
@@ -183,8 +186,8 @@ const Message = ({ chatMessage, id }: { chatMessage: Message; id: string }) => {
       <div className="message">
         <div className="title">
           {!isUser && <span>{chatMessage?.username}</span>}
-          {!!isDeveloper && !isUser && <span>Developer</span>}
-          {!!isUser && (
+          {!isUser && <span>{!!isDeveloper ? "Developer" : "Client"}</span>}
+          {(!!isCurrentUserDeveloper || !!isUser) && (
             <span className="details" onClick={() => setDetails(!details)}>
               <BsChevronDown />
             </span>

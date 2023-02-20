@@ -1,12 +1,16 @@
 import styled from "styled-components";
-import webinrush from "../../public/images/webinrush.webp";
-import { IoCloseOutline } from "react-icons/io5";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
+import { useRouter } from "next/router";
+import { signOut, useSession } from "next-auth/react";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { collection } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs, query } from "firebase/firestore";
 import { db } from "@/firebase";
-import { useSession } from "next-auth/react";
+import webinrush from "../../public/images/webinrush.webp";
+import { IoCloseOutline } from "react-icons/io5";
+import { RxExit } from "react-icons/rx";
+import { MdDeleteOutline } from "react-icons/md";
+import { TiUserDeleteOutline } from "react-icons/ti";
 
 type AboutProps = {
   isInfo: boolean;
@@ -27,10 +31,13 @@ const AboutStyle = styled.div<{ isInfo: boolean }>`
     border: none;
   }
   & header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(0.5rem);
     display: flex;
     align-items: center;
-    height: 5.1rem;
-    padding: 1rem;
+    padding: 1.525rem 1rem;
     width: 100%;
     background-color: rgb(var(--secondary-color), 0.25);
     gap: 1.5rem;
@@ -94,7 +101,7 @@ const AboutStyle = styled.div<{ isInfo: boolean }>`
   }
   & .description {
     width: 80%;
-    margin-inline: auto;
+    margin: 1rem auto;
     & p {
       color: rgb(var(--white-color), 0.75);
       text-align: justify;
@@ -106,7 +113,8 @@ const AboutStyle = styled.div<{ isInfo: boolean }>`
     }
   }
   & .team {
-    margin: 1rem auto;
+    padding-block: 1rem;
+    border-top: 1px solid rgb(var(--white-color), 0.1);
     & h2 {
       display: flex;
       width: 80%;
@@ -160,6 +168,40 @@ const AboutStyle = styled.div<{ isInfo: boolean }>`
       }
     }
   }
+  & .buttons {
+    padding-block: 1rem;
+    border-top: 1px solid rgb(var(--white-color), 0.1);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    gap: 0.25rem;
+    & .button {
+      padding-block: 1rem;
+      user-select: none;
+      cursor: pointer;
+      &:hover {
+        background: rgb(var(--black-color), 0.15);
+      }
+      &:active {
+        background: rgb(var(--black-color), 0.25);
+      }
+      & .wrapper {
+        width: 80%;
+        margin-inline: auto;
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        color: rgb(241, 92, 109);
+        font-weight: 500;
+        letter-spacing: 0.025rem;
+        & svg {
+          font-weight: 600;
+          font-size: 1.25rem;
+        }
+      }
+    }
+  }
 `;
 
 const About = ({ isInfo, setInfo }: AboutProps) => {
@@ -168,6 +210,10 @@ const About = ({ isInfo, setInfo }: AboutProps) => {
     session && collection(db, "team")
   );
   const members = team?.docs?.map((doc) => doc.data().members!);
+  const isDeveloper = members?.find(
+    ([member]) => member.email === session?.user?.email
+  );
+  const router = useRouter();
   return (
     <AboutStyle isInfo={isInfo}>
       <header>
@@ -213,7 +259,7 @@ const About = ({ isInfo, setInfo }: AboutProps) => {
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={profilePic}
-                      alt=""
+                      alt={name}
                       className="profilePic"
                       draggable={"false"}
                     />
@@ -230,6 +276,46 @@ const About = ({ isInfo, setInfo }: AboutProps) => {
               </a>
             );
           })}
+        </div>
+      </div>
+      <div className="buttons">
+        {!!isDeveloper && (
+          <div
+            className="button"
+            onClick={async () => {
+              const messages = await getDocs(query(collection(db, "messages")));
+              messages.forEach(async (message) => {
+                await deleteDoc(doc(db, "messages", message.id));
+              });
+            }}
+          >
+            <div className="wrapper">
+              <MdDeleteOutline />
+              <span>Delete conversation</span>
+            </div>
+          </div>
+        )}
+        <div
+          className="button"
+          onClick={() => {
+            router.push("/");
+          }}
+        >
+          <div className="wrapper">
+            <RxExit />
+            <span>Leave conversation</span>
+          </div>
+        </div>
+        <div
+          className="button"
+          onClick={() => {
+            signOut();
+          }}
+        >
+          <div className="wrapper">
+            <TiUserDeleteOutline />
+            <span>Sign out</span>
+          </div>
         </div>
       </div>
     </AboutStyle>
