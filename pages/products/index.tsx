@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
@@ -93,7 +94,10 @@ const ProductStyle = styled.div`
 const Product = () => {
   return (
     <ProductStyle className="container">
-      <h1>Some of Our Product</h1>
+      <Head>
+        <title>Our Products | WebInRush - Free Online Tools for You</title>
+      </Head>
+      <h1>Our Product</h1>
       <div className="product">
         <div className="thumbnail">
           <Image

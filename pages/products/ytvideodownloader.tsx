@@ -191,14 +191,12 @@ const YtVideoDownloader = () => {
     setError("");
     setLoading(true);
     await axios
-      .get(`/api/ytVideoDownloader?url=${videoUrl}`)
-      .then((res) => {
+      .get(`/api/ytVideoDownloader?url=${videoUrl.trim()}`)
+      .then((res): void => {
         setVideo(res.data);
         setLoading(false);
-        console.log(res);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((err: { message: string }): void => {
         setError(err.message);
         setLoading(false);
       });
@@ -267,18 +265,19 @@ const YtVideoDownloader = () => {
       </h1>
       <form onSubmit={handleSubmit}>
         <input
+          required
           type="text"
           placeholder="Enter the URL of the video"
           spellCheck="false"
           value={videoUrl}
           onChange={(e) => setVideoUrl(e.target.value)}
         />
-        <button type="submit" disabled={!!loading}>
+        <button type="submit" disabled={!!loading && !videoUrl.length}>
           {!!loading && <CircularProgress color="inherit" size={"1rem"} />}
           <span>Download</span>
         </button>
       </form>
-      {!!error && <p>{error}</p>}
+      {!error.length && <p>{error}</p>}
       {!!loading && (
         <div className="loader">
           <Skeleton
