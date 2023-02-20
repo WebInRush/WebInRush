@@ -16,6 +16,9 @@ const YtVideoDownloaderStyle = styled.div`
     display: flex;
     justify-content: center;
     gap: 0.5rem;
+    @media screen and (max-width: 50rem) {
+      gap: 0;
+    }
     & span {
       color: rgb(var(--white-color));
       display: flex;

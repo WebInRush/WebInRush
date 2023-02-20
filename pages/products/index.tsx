@@ -35,6 +35,9 @@ const ProductStyle = styled.div`
         transform: scale(1.025);
       }
     }
+    @media screen and (max-width: 50rem) {
+      padding: 0.5rem 0.75rem;
+    }
     &:hover {
       background-color: rgb(var(--white-color), 0.075);
     }
