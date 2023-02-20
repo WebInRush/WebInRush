@@ -108,6 +108,7 @@ const YtVideoDownloaderStyle = styled.div`
           border: 1px solid rgb(var(--white-color), 0.1);
           color: rgb(var(--white-color));
           border-radius: 5rem;
+          user-select: none;
           cursor: pointer;
           &:hover {
             background-color: rgb(var(--white-color), 0.1);
@@ -322,7 +323,12 @@ const YtVideoDownloader = () => {
             {video.video.map((item: any, index) => (
               <div key={index}>
                 <video src={item.url}></video>
-                <a download={item.url} target="_blank" rel="noreferrer">
+                <a
+                  download={item.url}
+                  href={item.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   Download {item.qualityLabel}
                 </a>
               </div>
