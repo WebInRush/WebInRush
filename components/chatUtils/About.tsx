@@ -192,7 +192,7 @@ const AboutStyle = styled.div<{ isInfo: boolean }>`
         display: flex;
         gap: 0.5rem;
         align-items: center;
-        color: rgb(241, 92, 109);
+        color: rgb(var(--red-color));
         font-weight: 500;
         letter-spacing: 0.025rem;
         & svg {

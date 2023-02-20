@@ -29,6 +29,7 @@ const GlobalStyle = createGlobalStyle`
   --secondary-gradient-1: 142, 202, 230;
   --white-color: 255, 255, 255;
   --black-color: 0, 0, 0;
+  --red-color: 241, 92, 109;
   scroll-behavior: smooth;
 }
 * {
