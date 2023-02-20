@@ -5,6 +5,7 @@ import google from "../../public/images/google.webp";
 import github from "../../public/images/github.webp";
 import Image from "next/image";
 import { GetServerSideProps } from "next";
+import Head from "next/head";
 
 const SigninStyled = styled.div`
   padding: 3rem;
@@ -97,6 +98,9 @@ const Signin = () => {
   return (
     <Layout>
       <SigninStyled>
+        <Head>
+          <title>Sign in | WebInRush 🚀</title>
+        </Head>
         <ul>
           {login.map((item, index) => (
             <li key={index} onClick={() => item.function()}>

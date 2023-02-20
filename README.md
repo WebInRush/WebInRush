@@ -35,16 +35,16 @@ To run the project, you will need to have Node.js and npm or yarn or pnpm instal
 
 ```bash
 cd WebInRush
-npm install
-npm run dev
+yarn
+yarn run dev
 ```
 
-or, if you are using yarn:
+or, if you are using npm:
 
 ```bash
 cd WebInRush
-yarn
-yarn run dev
+npm install
+npm run dev
 ```
 
 or, if you are using pnpm:

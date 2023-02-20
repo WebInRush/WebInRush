@@ -112,7 +112,6 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: Props) => {
           content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
         />
         <meta name="description" content={og.description} />
-
         <link rel="canonical" href={og.url} />
         <script type="application/ld+json">
           {`
@@ -170,7 +169,7 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: Props) => {
         <meta property="twitter:image" content={og.image} />
         <meta name="twitter:site" content="@itsme-Subid" />
         <meta name="twitter:creator" content="@itsme-Subid" />
-        <meta name="theme-color" content="#fff" />
+        <meta name="theme-color" content="#023047" />
         <meta name="next-head-count" content="26" />
       </Head>
       <GlobalStyle />

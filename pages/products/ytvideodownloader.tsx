@@ -1,7 +1,9 @@
 import { CircularProgress, Skeleton } from "@mui/material";
 import axios from "axios";
+import Head from "next/head";
 import { FormEvent, useState } from "react";
 import styled from "styled-components";
+import webinrush from "../../public/images/webinrush.webp";
 
 const YtVideoDownloaderStyle = styled.div`
   min-height: 50vh;
@@ -152,6 +154,16 @@ const YtVideoDownloaderStyle = styled.div`
   }
 `;
 
+const og = {
+  title: "Youtube Video Downloader | WebInRush 🚀",
+  describedTitle:
+    "Download YouTube videos quickly and easily with WebInRush's free video downloader.",
+  description:
+    "Experience hassle-free downloading of YouTube videos with WebInRush's user-friendly video downloader. Easily save your favorite videos for offline viewing or repurpose them for your own creative projects.",
+  image: webinrush.src,
+  url: "https://webinrush.vercel.app/products/ytvideodownloader",
+};
+
 const YtVideoDownloader = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -192,6 +204,62 @@ const YtVideoDownloader = () => {
   };
   return (
     <YtVideoDownloaderStyle className="container">
+      <Head>
+        <title>Youtube Video Downloader | WebInRush 🚀</title>
+        <meta name="description" content={og.description} />
+        <link rel="canonical" href={og.url} />
+        <script type="application/ld+json">
+          {`
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Full-Stack Developer",
+            "@id": ${og.url},
+            "name": ${og.describedTitle},
+            "url": ${og.url},
+            "sameAs": [
+              "https://www.instagram.com/itsme_subid/",
+              "https://twitter.com/ItsmeSubid"
+            ],
+            "logo": {
+              "@type": "ImageObject",
+              "@id": ${og.url},
+              "inLanguage": "en-US",
+              "url": ${og.image},
+              "contentUrl": ${og.image},
+              "width": 1000,
+              "height": 1000,
+              "caption": "itsme-Subid"
+            },
+            "image": { "@id": ${og.url} }
+          },
+          {
+            "@type": "WebPage",
+            "@id": ${og.url},
+            "url": ${og.url},
+            "name": ${og.describedTitle},
+            "isPartOf": {
+              "@id": ${og.url}
+            },
+            "about": { "@id": ${og.url} },
+            "description": ${og.description},
+            "inLanguage": "en-US"
+          }
+        ]
+      }
+      `}
+        </script>
+        <meta property="og:site_name" content={og.title} />
+        <meta property="og:url" content={og.url} />
+        <meta property="og:title" content={og.describedTitle} />
+        <meta property="og:description" content={og.description} />
+        <meta property="og:image" content={og.image} />
+        <meta property="twitter:url" content={og.url} />
+        <meta property="twitter:title" content={og.describedTitle} />
+        <meta property="twitter:description" content={og.description} />
+        <meta property="twitter:image" content={og.image} />
+      </Head>
       <h1>
         <span>Youtube Video Downloader</span>
         <span className="small">from WEBINRUSH</span>
