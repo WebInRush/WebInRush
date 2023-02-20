@@ -263,9 +263,11 @@ const Header = () => {
                 </Link>
               ))}
               {!session ? (
-                <li className="special" onClick={() => setMenu(false)}>
-                  <Link href="/auth/signin">Sign In</Link>
-                </li>
+                <Link href="/auth/signin">
+                  <li className="special" onClick={() => setMenu(false)}>
+                    Sign In
+                  </li>
+                </Link>
               ) : (
                 <>
                   <li
@@ -276,9 +278,11 @@ const Header = () => {
                   >
                     Logout
                   </li>
-                  <li className="special" onClick={() => setMenu(false)}>
-                    <Link href="/chat">Chat</Link>
-                  </li>
+                  <Link href="/chat">
+                    <li className="special" onClick={() => setMenu(false)}>
+                      Chat
+                    </li>
+                  </Link>
                 </>
               )}
             </ul>
