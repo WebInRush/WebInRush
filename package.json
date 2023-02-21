@@ -23,7 +23,7 @@
     "javascript-time-ago": "^2.5.9",
     "next": "13.1.2",
     "next-auth": "^4.18.10",
-    "puppeteer-core": "^6",
+    "puppeteer-core": "^3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-firebase-hooks": "^5.1.1",
