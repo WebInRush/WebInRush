@@ -72,20 +72,31 @@ const ProductStyle = styled.div`
         color: rgb(var(--white-color), 0.5);
         text-align: justify;
       }
-      & button {
-        width: fit-content;
-        padding: 1rem 3.5rem;
-        font-size: 1rem;
-        border: 1px solid rgb(var(--white-color), 0.1);
-        border-radius: 0.5rem;
-        cursor: pointer;
+      & .buttons {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 0;
+        margin: 0;
+        gap: 1rem;
         &:hover {
-          background-color: rgb(var(--white-color), 0.1);
-          color: rgb(var(--white-color));
+          background: none;
         }
-        &:active {
-          background-color: rgb(var(--white-color), 0.2);
-          color: rgb(var(--white-color));
+        & button {
+          width: fit-content;
+          padding: 1rem 3.5rem;
+          font-size: 1rem;
+          border: 1px solid rgb(var(--white-color), 0.1);
+          border-radius: 0.5rem;
+          cursor: pointer;
+          &:hover {
+            background-color: rgb(var(--white-color), 0.1);
+            color: rgb(var(--white-color));
+          }
+          &:active {
+            background-color: rgb(var(--white-color), 0.2);
+            color: rgb(var(--white-color));
+          }
         }
       }
     }
@@ -100,6 +111,7 @@ const Product = () => {
         "WebInRush's YouTube video downloader is an easy-to-use tool that lets you download YouTube videos in various formats, including MP4, and more. With just a few clicks, you can save your favorite videos for offline viewing, or extract audio to listen on your device. The downloader is fast, efficient, and works on all major browsers. It's perfect for anyone who wants to save videos to watch later, or for content creators who need to archive their own videos. Whether you're on the go or simply prefer to watch videos offline, WebInRush's YouTube video downloader is a powerful and reliable tool that you can count on.",
       thumbnail: ytvideodownloader.src,
       link: "/products/ytvideodownloader",
+      active: true,
     },
     {
       name: "Instagram Video Downloader",
@@ -107,6 +119,8 @@ const Product = () => {
         "WebInRush's Instagram video downloader is an easy-to-use tool that lets you download Instagram videos in various formats, including MP4, and more. With just a few clicks, you can save your favorite videos for offline viewing, or extract audio to listen on your device. The downloader is fast, efficient, and works on all major browsers. It's perfect for anyone who wants to save videos to watch later, or for content creators who need to archive their own videos. Whether you're on the go or simply prefer to watch videos offline, WebInRush's Instagram video downloader is a powerful and reliable tool that you can count on.",
       thumbnail: InstaVideoDownloader.src,
       link: "/products/instavideodownloader",
+      githubLink: "https://github.com/webinrush/webinrush",
+      active: false,
     },
   ];
   return (
@@ -128,9 +142,16 @@ const Product = () => {
           <div className="details">
             <h2>{product.name}</h2>
             <p className="description">{product.description}</p>
-            <Link href={product.link}>
-              <button>Try 🚀</button>
-            </Link>
+            <div className="buttons">
+              <Link href={product.link}>
+                <button>Try 🚀</button>
+              </Link>
+              {!product.active && (
+                <a href={product.githubLink} target="_blank" rel="noreferrer">
+                  <button>Code</button>
+                </a>
+              )}
+            </div>
           </div>
         </div>
       ))}

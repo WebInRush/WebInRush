@@ -197,7 +197,7 @@ const InstaVideoDownloader = () => {
   return (
     <InstaVideoDownloaderStyle className="container">
       <Head>
-        <title>Youtube Video Downloader | WebInRush 🚀</title>
+        <title>Instagram Video Downloader | WebInRush 🚀</title>
         <meta name="description" content={og.description} />
         <link rel="canonical" href={og.url} />
         <script type="application/ld+json">
@@ -252,6 +252,11 @@ const InstaVideoDownloader = () => {
         <meta property="twitter:description" content={og.description} />
         <meta property="twitter:image" content={og.image} />
       </Head>
+      <div className="alert">
+        <p>
+          <span>⚠️</span> Some features may not work.
+        </p>
+      </div>
       <h1>
         <span>Instagram Video Downloader</span>
         <span className="small">from WEBINRUSH</span>

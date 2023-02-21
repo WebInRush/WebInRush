@@ -25,7 +25,9 @@ const getVideoUrl = async (link: string) => {
     const $ = cheerio.load(response.data);
     const title = $("title").text();
     const poster = $("meta[property='og:image']").attr("content");
-    const src = await getVideoSrc(link);
+    const src = await getVideoSrc(link)
+      .then((src) => src)
+      .catch((err) => null);
     if (src) {
       return {
         title,
@@ -52,6 +54,5 @@ export default async function handler(
     return await getVideoUrl(url);
   });
   let videos = await Promise.all(videoPromises);
-
   res.status(200).json([...videos]);
 }
