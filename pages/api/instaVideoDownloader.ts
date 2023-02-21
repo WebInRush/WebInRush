@@ -1,51 +1,40 @@
+import axios from "axios";
+import cheerio from "cheerio";
 import { NextApiRequest, NextApiResponse } from "next";
+import { chromium } from "playwright-core";
 
-let puppeteer: any;
-let chrome: {
-  defaultViewport: any;
-  args: string[];
-  executablePath: Promise<string>;
-  headless: boolean;
-};
-if (process.env.NODE_ENV === "production") {
-  puppeteer = require("puppeteer-core");
-  chrome = require("chrome-aws-lambda");
-} else {
-  puppeteer = require("puppeteer");
+export async function getVideoSrc(instagramUrl: string): Promise<string> {
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+
+  await page.goto(instagramUrl);
+  await page.waitForSelector("video", { state: "visible" });
+
+  const videoSrc = await page.$eval("video", (video: any) => {
+    return (video as HTMLVideoElement).src;
+  });
+
+  await browser.close();
+
+  return videoSrc;
 }
 
-const getVideo = async (url: string) => {
-  let option: any = {
-    headless: true,
-  };
-  if (process.env.NODE_ENV === "production") {
-    option = {
-      ...option,
-      args: [...chrome.args, "--hide-scrollbars", "--disable-web-security"],
-      executablePath: await chrome.executablePath,
-      headless: chrome.headless,
-      defaultViewport: chrome.defaultViewport,
-      ignoreHTTPSErrors: true,
-    };
-  }
-  const browser = await puppeteer.launch(option);
-  const page = await browser.newPage();
-  await page.goto(url);
-  await page.waitForSelector("video", {
-    visible: true,
-  });
-  const data = await page.evaluate(() => {
-    const video = document.querySelector("video");
-    const poster = document.querySelector("img");
-    const title = document.querySelector("title");
+const getVideoUrl = async (link: string) => {
+  try {
+    const response = await axios.get(link);
+    const $ = cheerio.load(response.data);
+    const title = $("title").text();
+    const poster = $("meta[property='og:image']").attr("content");
+    const videoSrc = await getVideoSrc(link);
     return {
-      title: title?.textContent,
-      poster: poster?.getAttribute("src"),
-      src: video?.getAttribute("src"),
+      title,
+      poster,
+      src: videoSrc,
     };
-  });
-  await browser.close();
-  return data;
+  } catch (error) {
+    console.error(`Error retrieving video URL: ${error}`);
+    return null;
+  }
 };
 
 export default async function handler(
@@ -54,8 +43,9 @@ export default async function handler(
 ) {
   let { urls } = req.body;
   const videoPromises = urls.map(async (url: string) => {
-    return await getVideo(url);
+    return await getVideoUrl(url);
   });
   let videos = await Promise.all(videoPromises);
+
   res.status(200).json([...videos]);
 }
