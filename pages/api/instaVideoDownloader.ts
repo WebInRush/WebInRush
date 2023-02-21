@@ -25,11 +25,17 @@ const getVideoUrl = async (link: string) => {
     const $ = cheerio.load(response.data);
     const title = $("title").text();
     const poster = $("meta[property='og:image']").attr("content");
-    const videoSrc = await getVideoSrc(link);
+    const src = await getVideoSrc(link);
+    if (src) {
+      return {
+        title,
+        poster,
+        src,
+      };
+    }
     return {
       title,
       poster,
-      src: videoSrc,
     };
   } catch (error) {
     console.error(`Error retrieving video URL: ${error}`);
