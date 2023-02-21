@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 import ytvideodownloader from "../../public/images/ytvideodownloader.jpeg";
+import InstaVideoDownloader from "../../public/images/instavideodownloader.jpeg";
 
 const ProductStyle = styled.div`
   min-height: 50vh;
@@ -92,40 +93,47 @@ const ProductStyle = styled.div`
 `;
 
 const Product = () => {
+  const products = [
+    {
+      name: "Youtube Video Downloader",
+      description:
+        "WebInRush's YouTube video downloader is an easy-to-use tool that lets you download YouTube videos in various formats, including MP4, and more. With just a few clicks, you can save your favorite videos for offline viewing, or extract audio to listen on your device. The downloader is fast, efficient, and works on all major browsers. It's perfect for anyone who wants to save videos to watch later, or for content creators who need to archive their own videos. Whether you're on the go or simply prefer to watch videos offline, WebInRush's YouTube video downloader is a powerful and reliable tool that you can count on.",
+      thumbnail: ytvideodownloader.src,
+      link: "/products/ytvideodownloader",
+    },
+    {
+      name: "Instagram Video Downloader",
+      description:
+        "WebInRush's Instagram video downloader is an easy-to-use tool that lets you download Instagram videos in various formats, including MP4, and more. With just a few clicks, you can save your favorite videos for offline viewing, or extract audio to listen on your device. The downloader is fast, efficient, and works on all major browsers. It's perfect for anyone who wants to save videos to watch later, or for content creators who need to archive their own videos. Whether you're on the go or simply prefer to watch videos offline, WebInRush's Instagram video downloader is a powerful and reliable tool that you can count on.",
+      thumbnail: InstaVideoDownloader.src,
+      link: "/products/instavideodownloader",
+    },
+  ];
   return (
     <ProductStyle className="container">
       <Head>
         <title>Our Products | WebInRush - Free Online Tools for You</title>
       </Head>
       <h1>Our Product</h1>
-      <div className="product">
-        <div className="thumbnail">
-          <Image
-            src={ytvideodownloader.src}
-            alt="Youtube Video Downloader"
-            width={500}
-            height={400}
-          />
+      {products.map((product, index) => (
+        <div key={index} className="product">
+          <div className="thumbnail">
+            <Image
+              src={product.thumbnail}
+              alt={product.name}
+              width={500}
+              height={500}
+            />
+          </div>
+          <div className="details">
+            <h2>{product.name}</h2>
+            <p className="description">{product.description}</p>
+            <Link href={product.link}>
+              <button>Try 🚀</button>
+            </Link>
+          </div>
         </div>
-        <div className="details">
-          <h2>Youtube Video Downloader</h2>
-          <p className="description">
-            WebInRush&apos;s YouTube video downloader is an easy-to-use tool
-            that lets you download YouTube videos in various formats, including
-            MP4, and more. With just a few clicks, you can save your favorite
-            videos for offline viewing, or extract audio to listen on your
-            device. The downloader is fast, efficient, and works on all major
-            browsers. It&apos;s perfect for anyone who wants to save videos to
-            watch later, or for content creators who need to archive their own
-            videos. Whether you&apos;re on the go or simply prefer to watch
-            videos offline, WebInRush&apos;s YouTube video downloader is a
-            powerful and reliable tool that you can count on.
-          </p>
-          <Link href={"/products/ytvideodownloader"}>
-            <button>Try 🚀</button>
-          </Link>
-        </div>
-      </div>
+      ))}
     </ProductStyle>
   );
 };

@@ -1,11 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getInfo } from "ytdl-core";
+import getUrls from "get-urls";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { url } = req.query;
+  let { url } = req.query;
+  url = Array.from(getUrls(url as string))[0];
   try {
     const info = await getInfo(url as string);
     const title = info.videoDetails.title;
