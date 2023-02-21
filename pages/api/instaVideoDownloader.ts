@@ -1,10 +1,33 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import puppeteer from "puppeteer";
+// if in production, import puppeteer-core and set executablePath to the path of your chrome executable file (e.g. /usr/bin/chromium-browser) and pass it to the launch function as an option (e.g. executablePath: '/usr/bin/chromium-browser')
+let puppeteer: any;
+let chrome: {
+  defaultViewport: any;
+  args: string[];
+  executablePath: Promise<string>;
+  headless: boolean;
+};
+if (process.env.NODE_ENV === "production") {
+  puppeteer = require("puppeteer-core");
+  chrome = require("chrome-aws-lambda");
+} else {
+  puppeteer = require("puppeteer");
+}
 
 const getVideo = async (url: string) => {
-  const browser = await puppeteer.launch({
+  let option: any = {
     headless: true,
-  });
+  };
+  if (process.env.NODE_ENV === "production") {
+    option = {
+      ...option,
+      args: [...chrome.args, "--hide-scrollbars", "--disable-web-security"],
+      executablePath: await chrome.executablePath,
+      headless: chrome.headless,
+      defaultViewport: chrome.defaultViewport,
+    };
+  }
+  const browser = await puppeteer.launch(option);
   const page = await browser.newPage();
   await page.goto(url);
   await page.waitForSelector("video", {
