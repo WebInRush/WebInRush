@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-// if in production, import puppeteer-core and set executablePath to the path of your chrome executable file (e.g. /usr/bin/chromium-browser) and pass it to the launch function as an option (e.g. executablePath: '/usr/bin/chromium-browser')
+
 let puppeteer: any;
 let chrome: {
   defaultViewport: any;
@@ -25,6 +25,7 @@ const getVideo = async (url: string) => {
       executablePath: await chrome.executablePath,
       headless: chrome.headless,
       defaultViewport: chrome.defaultViewport,
+      ignoreHTTPSErrors: true,
     };
   }
   const browser = await puppeteer.launch(option);
