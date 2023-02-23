@@ -319,13 +319,8 @@ const YtVideoDownloader = () => {
           <div className="videos">
             {video.video.map((item: any, index) => (
               <div key={index}>
-                <video src={item.url}></video>
-                <a
-                  download={item.url}
-                  href={item.url}
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <video src={item.url} controls></video>
+                <a download href={item.url} target="_blank" rel="noreferrer">
                   Download {item.qualityLabel}
                 </a>
               </div>
