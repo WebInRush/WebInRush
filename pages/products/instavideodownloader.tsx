@@ -70,9 +70,7 @@ const InstaVideoDownloaderStyle = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-      & span {
-        margin-left: 10px;
-      }
+      gap: 0.75rem;
     }
   }
   & p {
