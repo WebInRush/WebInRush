@@ -48,6 +48,9 @@ body {
 .container {
   margin-inline: auto;
   width: min(90%, 70rem);
+  @media screen and (max-width: 50rem){
+    padding-top: 2rem;
+  }
 }
 .App {
   min-height: 100vh;

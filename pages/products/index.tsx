@@ -7,7 +7,6 @@ import InstaVideoDownloader from "../../public/images/instavideodownloader.jpeg"
 import { AiFillGithub } from "react-icons/ai";
 
 const ProductStyle = styled.div`
-  padding-top: 2rem;
   min-height: 50vh;
   display: flex;
   flex-direction: column;

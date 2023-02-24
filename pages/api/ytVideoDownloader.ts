@@ -13,8 +13,22 @@ export default async function handler(
     const title = info.videoDetails.title;
     const video = info.formats
       .map(
-        ({ qualityLabel, url, hasAudio, hasVideo }) =>
-          hasAudio && hasVideo && { qualityLabel, url }
+        ({
+          qualityLabel,
+          url,
+          hasAudio,
+          hasVideo,
+          audioBitrate,
+          container,
+        }) =>
+          hasAudio && {
+            container,
+            audioBitrate,
+            hasAudio,
+            hasVideo,
+            qualityLabel,
+            url,
+          }
       )
       .filter(Boolean);
     res.status(200).json({

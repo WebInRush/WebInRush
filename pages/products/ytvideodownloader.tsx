@@ -6,6 +6,7 @@ import styled from "styled-components";
 import webinrush from "../../public/images/webinrush.webp";
 
 const YtVideoDownloaderStyle = styled.div`
+  padding-top: 2rem;
   min-height: 50vh;
   display: flex;
   flex-direction: column;
@@ -28,6 +29,7 @@ const YtVideoDownloaderStyle = styled.div`
       display: flex;
       justify-content: flex-end;
       align-items: flex-end;
+      text-align: center;
       &.small {
         position: relative;
         top: -0.5rem;
@@ -78,6 +80,7 @@ const YtVideoDownloaderStyle = styled.div`
   & div {
     display: flex;
     flex-direction: column;
+    width: 100%;
     gap: 1rem;
     & h2 {
       font-size: 1.2rem;
@@ -86,15 +89,21 @@ const YtVideoDownloaderStyle = styled.div`
       text-align: center;
     }
     & div.videos {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      place-items: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      flex-wrap: wrap;
       gap: 1rem;
-      & div {
+      & > div {
+        width: 45%;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 1rem;
+        @media screen and (max-width: 50rem) {
+          width: 100%;
+        }
         & video {
           width: 100%;
           height: 100%;
@@ -169,6 +178,10 @@ type VideoType = {
     {
       qualityLabel: string;
       url: string;
+      hasAudio: boolean;
+      hasVideo: boolean;
+      audioBitrate?: number;
+      container?: string;
     }
   ];
 };
@@ -311,19 +324,43 @@ const YtVideoDownloader = () => {
         <div>
           <h2>{video.title}</h2>
           <div className="videos">
-            {video.video.map((item: any, index) => (
-              <div key={index}>
-                <video src={item.url} controls></video>
-                <a
-                  download="WebInRush"
-                  href={item.url}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Download {item.qualityLabel}
-                </a>
-              </div>
-            ))}
+            {video.video.map(
+              (
+                item: {
+                  qualityLabel: string;
+                  url: string;
+                  hasAudio: boolean;
+                  hasVideo: boolean;
+                  audioBitrate?: number;
+                  container?: string;
+                },
+                index: number
+              ) => (
+                <div key={index}>
+                  {item.hasVideo ? (
+                    <video src={item.url} controls></video>
+                  ) : (
+                    <audio controls>
+                      <source src={item.url} />
+                    </audio>
+                  )}
+                  <a
+                    download="WebInRush"
+                    href={item.url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Download{" "}
+                    {item.hasAudio && item.hasVideo
+                      ? `Video`
+                      : `Audio ${
+                          item.audioBitrate && item.audioBitrate
+                        } Kbps`}{" "}
+                    {item.qualityLabel} {item.container}
+                  </a>
+                </div>
+              )
+            )}
           </div>
         </div>
       )}
