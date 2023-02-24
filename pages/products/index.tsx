@@ -4,8 +4,10 @@ import Link from "next/link";
 import styled from "styled-components";
 import ytvideodownloader from "../../public/images/ytvideodownloader.jpeg";
 import InstaVideoDownloader from "../../public/images/instavideodownloader.jpeg";
+import { AiFillGithub } from "react-icons/ai";
 
 const ProductStyle = styled.div`
+  padding-top: 2rem;
   min-height: 50vh;
   display: flex;
   flex-direction: column;
@@ -37,10 +39,11 @@ const ProductStyle = styled.div`
         transform: scale(1.025);
       }
     }
+    &:hover {
+      background-color: rgb(var(--white-color), 0.075);
+    }
     @media screen and (max-width: 50rem) {
       padding: 0.5rem 0.75rem;
-    }
-    &:hover {
       background-color: rgb(var(--white-color), 0.075);
     }
     & .thumbnail {
@@ -79,11 +82,16 @@ const ProductStyle = styled.div`
         padding: 0;
         margin: 0;
         gap: 1rem;
+        @media screen and (max-width: 50rem) {
+          display: grid;
+          place-content: center;
+          flex-direction: column;
+        }
         &:hover {
           background: none;
         }
         & button {
-          width: fit-content;
+          width: 100%;
           padding: 1rem 3.5rem;
           font-size: 1rem;
           border: 1px solid rgb(var(--white-color), 0.1);
@@ -148,7 +156,9 @@ const Product = () => {
               </Link>
               {!product.active && (
                 <a href={product.githubLink} target="_blank" rel="noreferrer">
-                  <button>Code</button>
+                  <button>
+                    Code <AiFillGithub />
+                  </button>
                 </a>
               )}
             </div>

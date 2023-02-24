@@ -2,7 +2,14 @@ import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
-import { FaHamburger } from "react-icons/fa";
+import { AiFillHome } from "react-icons/ai";
+import { BsFillChatFill, BsFillInfoCircleFill } from "react-icons/bs";
+import { FaUserAlt } from "react-icons/fa";
+import { RiShoppingCartFill } from "react-icons/ri";
+
+type NavbarType = {
+  transparent?: boolean;
+};
 
 const Navbar = styled.nav`
   display: flex;
@@ -26,23 +33,14 @@ const Navbar = styled.nav`
     &:hover {
       color: rgba(var(--primary-color));
     }
-    @media screen and (max-width: 50rem) {
-      display: none;
-    }
   }
   & .menu {
-    @media screen and (max-width: 50rem) {
-      width: 100%;
-    }
     gap: 1rem;
     & ul {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 1rem;
-      @media screen and (max-width: 50rem) {
-        flex-direction: column;
-      }
       & > a {
         display: flex;
         align-items: center;
@@ -75,20 +73,6 @@ const Navbar = styled.nav`
         }
         &:hover::before {
           width: 100%;
-          @media screen and (max-width: 50rem) {
-            width: 0;
-          }
-        }
-        @media screen and (max-width: 50rem) {
-          font-size: 1.25rem;
-          text-align: center;
-          letter-spacing: 0.1rem;
-          background: rgba(var(--dark-color), 0.5);
-          -webkit-backdrop-filter: blur(0.5rem);
-          backdrop-filter: blur(0.5rem);
-          padding: 0.75rem 1rem;
-          border-radius: 2rem;
-          width: 100%;
         }
         &.special {
           background-color: rgb(var(--secondary-color));
@@ -105,15 +89,6 @@ const Navbar = styled.nav`
           &:hover {
             box-shadow: rgba(var(--secondary-color), 0.5) 0 0 0.5rem;
           }
-          @media screen and (max-width: 50rem) {
-            font-size: 1.25rem;
-            text-align: center;
-            letter-spacing: 0.1rem;
-            background: rgba(var(--secondary-color));
-            padding: 0.5rem 1rem;
-            border-radius: 2rem;
-            width: 100%;
-          }
         }
         &.special:hover::before {
           width: 0;
@@ -122,11 +97,6 @@ const Navbar = styled.nav`
     }
   }
 `;
-
-type NavbarType = {
-  menu?: boolean;
-  transparent?: boolean;
-};
 
 const StyledNavbar = styled.div<NavbarType>`
   position: sticky;
@@ -140,66 +110,96 @@ const StyledNavbar = styled.div<NavbarType>`
   flex-direction: column;
   transition: all 0.15s;
   @media screen and (max-width: 50rem) {
-    height: 100vh;
-    overflow: hidden;
-    position: fixed;
-    height: 100%;
-    flex-direction: column-reverse;
-    justify-content: space-between;
+    display: none;
   }
   ${(props) =>
     props.transparent &&
     css`
       background: rgb(var(--dark-color), 0.5);
+      @media screen and (max-width: 50rem) {
+        background: transparent;
+      }
     `};
-  ${(props) =>
-    !props.menu
-      ? css`
-          @media screen and (max-width: 50rem) {
-            transform: translateX(-100%);
-          }
-        `
-      : css`
-          @media screen and (max-width: 50rem) {
-            backdrop-filter: blur(1rem);
-            background: rgb(var(--dark-color), 0.5);
-          }
-        `}
 `;
 
-const MobileNavbar = styled.nav<NavbarType>`
-  position: sticky;
-  top: 0;
+const MobileNavbar = styled.nav`
+  position: fixed;
+  bottom: 0;
   left: 0;
   width: 100%;
   z-index: 2;
-  color: rgba(var(--white-color));
-  backdrop-filter: blur(5px);
-  transition: all 0.15s;
+  transition: 0.15s;
   transform: translateY(-100%);
   opacity: 0;
   scale: 0;
   font-size: 1.5rem;
   padding-block: 0.5rem;
+  border-top: 1px solid rgba(var(--white-color), 0.25);
+  border-radius: 1.5rem 1.5rem 0 0;
+  color: rgba(var(--white-color));
+  background: rgb(var(--dark-color));
   transition: 0.15s;
   @media screen and (max-width: 50rem) {
     transform: translateY(0);
     opacity: 1;
     scale: 1;
   }
-  ${(props) =>
-    props.transparent &&
-    css`
-      background: rgb(var(--dark-color), 0.5);
-    `};
-  & .content {
-    cursor: pointer;
+  & .tab-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0.5rem 0;
+    & li {
+      position: relative;
+      display: grid;
+      place-content: center;
+      height: 1.5rem;
+      list-style: none;
+      font-size: 1.5rem;
+      transition: color 0.15s;
+      &:hover {
+        color: rgb(var(--primary-color));
+      }
+      & a {
+        display: grid;
+        place-items: center;
+        & span {
+          display: grid;
+          place-items: center;
+          width: 100%;
+          text-align: center;
+          transition: 0.15s;
+          &.text {
+            position: absolute;
+            display: flex;
+            width: fit-content;
+            text-align: center;
+            bottom: -0.5rem;
+            left: 50%;
+            right: 0;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translate(-50%, -1rem);
+          }
+        }
+      }
+      &.active {
+        color: rgb(var(--primary-color));
+        & span.icon {
+          transform: translate(0, -0.75rem);
+        }
+        & span.text {
+          opacity: 1;
+          transform: translate(-50%, 0);
+        }
+      }
+    }
   }
 `;
 
 const Header = () => {
   const [scroll, setScroll] = useState<boolean>(false);
-  const [menu, setMenu] = useState<boolean>(false);
   const [logo, setLogo] = useState("WebInRush");
   const { data: session } = useSession();
   useEffect(() => {
@@ -246,7 +246,7 @@ const Header = () => {
   };
   return (
     <>
-      <StyledNavbar menu={menu} transparent={scroll}>
+      <StyledNavbar transparent={scroll}>
         <Navbar>
           <div className="logo">
             <Link href="/" onMouseOver={mouseOver}>
@@ -257,31 +257,24 @@ const Header = () => {
             <ul>
               {navbar.links.map(({ name, path }, index) => (
                 <Link href={path} key={index}>
-                  <li key={index} onClick={() => setMenu(false)}>
-                    {name}
-                  </li>
+                  <li key={index}>{name}</li>
                 </Link>
               ))}
               {!session ? (
                 <Link href="/auth/signin">
-                  <li className="special" onClick={() => setMenu(false)}>
-                    Sign In
-                  </li>
+                  <li className="special">Sign In</li>
                 </Link>
               ) : (
                 <>
                   <li
                     onClick={() => {
                       signOut();
-                      setMenu(false);
                     }}
                   >
                     Logout
                   </li>
                   <Link href="/chat">
-                    <li className="special" onClick={() => setMenu(false)}>
-                      Chat
-                    </li>
+                    <li className="special">Chat</li>
                   </Link>
                 </>
               )}
@@ -289,10 +282,87 @@ const Header = () => {
           </div>
         </Navbar>
       </StyledNavbar>
-      <MobileNavbar transparent={scroll}>
-        <div className="content container" onClick={() => setMenu(!menu)}>
-          <FaHamburger />
-        </div>
+      <MobileNavbar>
+        <ul className="tab-bar">
+          <li
+            onClick={(e) => {
+              Array.from(document.querySelectorAll(".tab-bar li")).map((item) =>
+                item.classList.remove("active")
+              );
+              e.currentTarget.classList.toggle("active");
+            }}
+          >
+            <Link href="/">
+              <span className="icon">
+                <AiFillHome />
+              </span>
+              <span className="text">Home</span>
+            </Link>
+          </li>
+          <li
+            onClick={(e) => {
+              Array.from(document.querySelectorAll(".tab-bar li")).map((item) =>
+                item.classList.remove("active")
+              );
+              e.currentTarget.classList.toggle("active");
+            }}
+          >
+            <Link href="/products">
+              <span className="icon">
+                <RiShoppingCartFill />
+              </span>
+              <span className="text">Products</span>
+            </Link>
+          </li>
+          {!!session ? (
+            <li
+              onClick={(e) => {
+                Array.from(document.querySelectorAll(".tab-bar li")).map(
+                  (item) => item.classList.remove("active")
+                );
+                e.currentTarget.classList.toggle("active");
+              }}
+            >
+              <Link href="/chat">
+                <span className="icon">
+                  <BsFillChatFill />
+                </span>
+                <span className="text">Chat</span>
+              </Link>
+            </li>
+          ) : (
+            <li
+              onClick={(e) => {
+                Array.from(document.querySelectorAll(".tab-bar li")).map(
+                  (item) => item.classList.remove("active")
+                );
+                e.currentTarget.classList.toggle("active");
+              }}
+            >
+              <Link href="/auth/signin">
+                <span className="icon">
+                  <FaUserAlt />
+                </span>
+                <span className="text">Sign in</span>
+              </Link>
+            </li>
+          )}
+          <li
+            onClick={(e) => {
+              Array.from(document.querySelectorAll(".tab-bar li")).map((item) =>
+                item.classList.remove("active")
+              );
+              e.currentTarget.classList.toggle("active");
+            }}
+          >
+            <Link href="/about">
+              <span className="icon">
+                <BsFillInfoCircleFill />
+              </span>
+              <span className="text">About</span>
+            </Link>
+          </li>
+        </ul>
       </MobileNavbar>
     </>
   );

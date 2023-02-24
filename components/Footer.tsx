@@ -11,7 +11,7 @@ import { useState } from "react";
 
 const FooterElement = styled.footer`
   background-color: rgb(var(--secondary-color), 0.25);
-  margin-block: 3rem;
+  margin-block: 3rem 5rem;
   padding: 3rem;
   border-radius: 2rem;
   text-align: center;
