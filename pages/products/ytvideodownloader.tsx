@@ -163,27 +163,21 @@ const og = {
   url: "https://webinrush.vercel.app/products/ytvideodownloader",
 };
 
+type VideoType = {
+  title: string;
+  video: [
+    {
+      qualityLabel: string;
+      url: string;
+    }
+  ];
+};
+
 const YtVideoDownloader = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
-  const [video, setVideo] = useState<{
-    title: string;
-    video: [
-      {
-        qualityLabel: string;
-        url: string;
-      }
-    ];
-  }>({
-    title: "",
-    video: [
-      {
-        qualityLabel: "",
-        url: "",
-      },
-    ],
-  });
+  const [video, setVideo] = useState<VideoType>({} as VideoType);
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
@@ -270,7 +264,7 @@ const YtVideoDownloader = () => {
           value={videoUrl}
           onChange={(e) => setVideoUrl(e.target.value)}
         />
-        <button type="submit" disabled={!!loading && !videoUrl.length}>
+        <button type="submit" disabled={!!loading || !videoUrl.length}>
           {!!loading && <CircularProgress color="inherit" size={"1rem"} />}
           <span>Download</span>
         </button>
@@ -313,7 +307,7 @@ const YtVideoDownloader = () => {
           </div>
         </div>
       )}
-      {!!video.video.length && !loading && !!video.video[0].url && (
+      {!!video?.video?.length && !loading && !!video?.video[0].url && (
         <div>
           <h2>{video.title}</h2>
           <div className="videos">
