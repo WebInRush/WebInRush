@@ -8,7 +8,7 @@ const HomeStyled = styled.div`
   display: grid;
   place-items: center;
   min-height: 100vh;
-  top: -3.25rem;
+  top: -3.75rem;
   width: 100%;
   background-image: linear-gradient(
       to right,
