@@ -52,11 +52,6 @@ body {
     padding-top: 2rem;
   }
 }
-.App {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-}
 ::-webkit-scrollbar {
   width: 0.25em;
 }
@@ -75,7 +70,12 @@ a {
   text-decoration: none;
   color: inherit;
   transition: 0.15s;
-}`;
+}
+button {
+  cursor: pointer;
+  user-select: none;
+}
+`;
 
 const container = {
   hidden: { opacity: 0 },
