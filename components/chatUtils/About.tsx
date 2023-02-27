@@ -11,6 +11,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import { RxExit } from "react-icons/rx";
 import { MdDeleteOutline } from "react-icons/md";
 import { TiUserDeleteOutline } from "react-icons/ti";
+import { Member } from "@/member";
 
 type AboutProps = {
   isInfo: boolean;
@@ -209,9 +210,9 @@ const About = ({ isInfo, setInfo }: AboutProps) => {
   const [team, loading, error] = useCollection(
     session && collection(db, "team")
   );
-  const members = team?.docs?.map((doc) => doc.data().members!);
+  const members = team?.docs?.map((doc) => doc.data().members!)[0];
   const isDeveloper = members?.find(
-    ([member]) => member.email === session?.user?.email
+    (member: Member) => member.email === session?.user?.email
   );
   const router = useRouter();
   return (
@@ -250,8 +251,8 @@ const About = ({ isInfo, setInfo }: AboutProps) => {
           {members?.length! > 1 ? "participants" : "participant"}
         </h2>
         <div className="members">
-          {members?.map((member, index) => {
-            const { profilePic, name, about, link } = member[0];
+          {members?.map((member: Member, index: number) => {
+            const { profilePic, name, about, link } = member;
             return (
               <a href={link} key={index} target="_blank" rel="noreferrer">
                 <div className="member">

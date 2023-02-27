@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { db } from "@/firebase";
 import { collection, deleteDoc, doc, getDocs, query } from "firebase/firestore";
+import { Member } from "@/member";
 
 type StyleProps = {
   isMore: boolean;
@@ -143,15 +144,14 @@ const HeaderStyled = styled.header<StyleProps>`
 
 const Header = ({ isInfo, setInfo }: HeaderProps) => {
   const { data: session } = useSession();
-  const [team] = useCollection(session && collection(db, "team"));
+  const [team, loading, error] = useCollection(
+    session && collection(db, "team")
+  );
   const members = team?.docs
-    ?.map((doc) => doc.data().members!)
-    .map((member) => {
-      const { name, email } = member[0];
-      return { name, email };
-    });
+    ?.map((doc) => doc.data().members!)[0]
+    ?.map(({ name, email }: Member) => ({ name, email }));
   const isDeveloper = members?.find(
-    (member) => member.email === session?.user?.email
+    (member: Member) => member.email === session?.user?.email
   );
   const [more, setMore] = useState(false);
   const router = useRouter();
@@ -162,14 +162,7 @@ const Header = ({ isInfo, setInfo }: HeaderProps) => {
         <div className="conversation-info-header">
           <div className="company-name">WEBINRUSH</div>
           <div className="subtitle">
-            {members?.map((member, index) => {
-              const { name } = member;
-              return (
-                <span className="name" title={name} key={index}>
-                  {name}
-                </span>
-              );
-            })}
+            {members?.map(({ name }: Member, index: number) => name).join(", ")}
           </div>
         </div>
       </div>
