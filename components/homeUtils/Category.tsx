@@ -7,6 +7,8 @@ const CategoryStyle = styled.section`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
   @media screen and (max-width: 50rem) {
     margin-block: 3.5rem;
   }
