@@ -12,7 +12,6 @@ const ChatStyle = styled.div<{ isInfo: boolean }>`
   display: flex;
   width: 100vw;
   height: 100vh;
-  height: 100dvh;
   overflow: hidden;
   & .chat {
     flex: 1;

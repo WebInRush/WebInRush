@@ -9,7 +9,6 @@ const HomeStyled = styled.div`
   display: grid;
   place-items: center;
   min-height: 100vh;
-  min-height: 100dvh;
   & .content {
     padding: 0;
     display: flex;

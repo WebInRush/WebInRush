@@ -9,7 +9,6 @@ const PlanStyle = styled.div`
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
-  min-height: 100dvh;
   gap: 3rem;
   & h2 {
     color: rgb(var(--white-color));
