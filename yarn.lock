@@ -3282,7 +3282,7 @@ negotiator@^0.6.3:
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.3.tgz#58e323a72fedc0d6f9cd4d31fe49f51479590ccd"
   integrity sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==
 
-next-auth@^4.20.1:
+next-auth@^4.19.2:
   version "4.20.1"
   resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-4.20.1.tgz#6e65c4fde14171f6ce64f05f672f80f39fc418c7"
   integrity sha512-ZcTUN4qzzZ/zJYgOW0hMXccpheWtAol8QOMdMts+LYRcsPGsqf2hEityyaKyECQVw1cWInb9dF3wYwI5GZdEmQ==
@@ -3771,12 +3771,12 @@ react-transition-group@^4.4.5:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react-uploader@^3.7.1:
-  version "3.7.1"
-  resolved "https://registry.yarnpkg.com/react-uploader/-/react-uploader-3.7.1.tgz#c4be4e603bb347c81814f032f3f8161c88e62173"
-  integrity sha512-IcNiAevKBInDstRfOOI6wPlQczvII6iT4fxDN8HEeAwMFmgVX9N9KhcTCd6Upi1kYL3FKvrMcsxha4wkxt1TrA==
+react-uploader@^3.13.0:
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/react-uploader/-/react-uploader-3.13.0.tgz#7a8deee11246f33cdc2614da001ff83e980a2406"
+  integrity sha512-DAkeApJWfyU+7UZA/Pmr4mWf4jhUWoEmkwu1/6VoHL5hS4i6TisRQzHyiZf4YiMS01oAS22Q+Bj4UWv+LEx4gw==
   dependencies:
-    uploader "^3.6.0"
+    uploader "^3.12.0"
 
 react@18.2.0:
   version "18.2.0"
@@ -4286,10 +4286,10 @@ upload-js@^2.11.0:
     "@upload-io/upload-api-client-upload-js" "^2.15.0"
     progress-smoother "^1.4.0"
 
-uploader@^3.6.0, uploader@^3.9.0:
-  version "3.9.0"
-  resolved "https://registry.yarnpkg.com/uploader/-/uploader-3.9.0.tgz#e31e845fa6967e69e4edb70a1dfce90fe50e6c80"
-  integrity sha512-sv1p4ZFXQReJNsYGBwToREGqh/SsLgmt8mnpluux8ui78vhwSiHt7LOgfRm7iCguYiPQcVS9NsdkJulq4J46qQ==
+uploader@^3.12.0, uploader@^3.9.0:
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/uploader/-/uploader-3.13.0.tgz#4e3765d65997aeaef8d76cf2a07edce11040f14a"
+  integrity sha512-7ZYuX4ltWAy3WtiMyrYNp1IXZP2ILS/6evCCS5AjTeBnLgOw47K1vCjWBT1bvvXK4s/awulVLaCEFwxCXQzVSA==
   dependencies:
     classnames "^2.2.6"
     preact "^10.6.5"
