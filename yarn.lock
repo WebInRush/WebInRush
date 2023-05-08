@@ -3282,10 +3282,10 @@ negotiator@^0.6.3:
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.3.tgz#58e323a72fedc0d6f9cd4d31fe49f51479590ccd"
   integrity sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==
 
-next-auth@^4.20.1:
-  version "4.20.1"
-  resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-4.20.1.tgz#6e65c4fde14171f6ce64f05f672f80f39fc418c7"
-  integrity sha512-ZcTUN4qzzZ/zJYgOW0hMXccpheWtAol8QOMdMts+LYRcsPGsqf2hEityyaKyECQVw1cWInb9dF3wYwI5GZdEmQ==
+next-auth@^4.19.2:
+  version "4.22.1"
+  resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-4.22.1.tgz#1ea5084e38867966dc6492a71c6729c8f5cfa96b"
+  integrity sha512-NTR3f6W7/AWXKw8GSsgSyQcDW6jkslZLH8AiZa5PQ09w1kR8uHtR9rez/E9gAq/o17+p0JYHE8QjF3RoniiObA==
   dependencies:
     "@babel/runtime" "^7.20.13"
     "@panva/hkdf" "^1.0.2"
@@ -4278,22 +4278,22 @@ unique-slug@^3.0.0:
   dependencies:
     imurmurhash "^0.1.4"
 
-upload-js@^2.11.0:
-  version "2.11.2"
-  resolved "https://registry.yarnpkg.com/upload-js/-/upload-js-2.11.2.tgz#b5292b50ae2a21fdda5c0f8f099f3bd4cedb4776"
-  integrity sha512-q6IkwFLA3kL1MbBMvzCbJC0EHjMgjJ399f5QH3Up5rkoVjYXZxTKRgyJQeRT1HpqPQ3gCJdvZuL/Cv1LjBRGMg==
+upload-js@^2.16.0:
+  version "2.16.0"
+  resolved "https://registry.yarnpkg.com/upload-js/-/upload-js-2.16.0.tgz#874acb940b7da07924d896c701af1da11a02c1e2"
+  integrity sha512-k4FAeapW2NnGhvvyajTItar/BQ/0kg9+31hVXqQsylUlN3IYnEo7IH6ImOfz36Poz2umB6agfTeAPJfAuXQCdQ==
   dependencies:
     "@upload-io/upload-api-client-upload-js" "^2.15.0"
     progress-smoother "^1.4.0"
 
-uploader@^3.6.0, uploader@^3.9.0:
-  version "3.9.0"
-  resolved "https://registry.yarnpkg.com/uploader/-/uploader-3.9.0.tgz#e31e845fa6967e69e4edb70a1dfce90fe50e6c80"
-  integrity sha512-sv1p4ZFXQReJNsYGBwToREGqh/SsLgmt8mnpluux8ui78vhwSiHt7LOgfRm7iCguYiPQcVS9NsdkJulq4J46qQ==
+uploader@^3.27.0, uploader@^3.6.0:
+  version "3.27.0"
+  resolved "https://registry.yarnpkg.com/uploader/-/uploader-3.27.0.tgz#29bf890835dc4ac7427b0e874b15169921d60226"
+  integrity sha512-s+pZlVBO8UuFdmkueK5BUMJQU+DNVD/b2o0syo8V8jhx4VQkc2Mv5PQoHJdU1Hn0uOA12j59F+th/RUB7n90UA==
   dependencies:
     classnames "^2.2.6"
     preact "^10.6.5"
-    upload-js "^2.11.0"
+    upload-js "^2.16.0"
 
 uri-js@^4.2.2:
   version "4.4.1"
