@@ -43,6 +43,6 @@
     "@types/styled-components": "^5.1.26",
     "@types/uuid": "^9.0.1",
     "eslint": "8.31.0",
-    "eslint-config-next": "13.1.2"
+    "eslint-config-next": "13.4.2"
   }
 }
