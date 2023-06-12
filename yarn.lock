@@ -3060,6 +3060,11 @@ lodash.camelcase@^4.3.0:
   resolved "https://registry.yarnpkg.com/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
   integrity sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==
 
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+  integrity sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==
+
 lodash.merge@^4.6.2:
   version "4.6.2"
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
@@ -3282,10 +3287,10 @@ negotiator@^0.6.3:
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.3.tgz#58e323a72fedc0d6f9cd4d31fe49f51479590ccd"
   integrity sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==
 
-next-auth@^4.20.1:
-  version "4.20.1"
-  resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-4.20.1.tgz#6e65c4fde14171f6ce64f05f672f80f39fc418c7"
-  integrity sha512-ZcTUN4qzzZ/zJYgOW0hMXccpheWtAol8QOMdMts+LYRcsPGsqf2hEityyaKyECQVw1cWInb9dF3wYwI5GZdEmQ==
+next-auth@^4.19.2:
+  version "4.22.1"
+  resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-4.22.1.tgz#1ea5084e38867966dc6492a71c6729c8f5cfa96b"
+  integrity sha512-NTR3f6W7/AWXKw8GSsgSyQcDW6jkslZLH8AiZa5PQ09w1kR8uHtR9rez/E9gAq/o17+p0JYHE8QjF3RoniiObA==
   dependencies:
     "@babel/runtime" "^7.20.13"
     "@panva/hkdf" "^1.0.2"
@@ -3771,12 +3776,13 @@ react-transition-group@^4.4.5:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react-uploader@^3.7.1:
-  version "3.7.1"
-  resolved "https://registry.yarnpkg.com/react-uploader/-/react-uploader-3.7.1.tgz#c4be4e603bb347c81814f032f3f8161c88e62173"
-  integrity sha512-IcNiAevKBInDstRfOOI6wPlQczvII6iT4fxDN8HEeAwMFmgVX9N9KhcTCd6Upi1kYL3FKvrMcsxha4wkxt1TrA==
+react-uploader@^3.37.0:
+  version "3.37.0"
+  resolved "https://registry.yarnpkg.com/react-uploader/-/react-uploader-3.37.0.tgz#6d5ba05632b86a321602fb5a0cc01b42ec98203e"
+  integrity sha512-XmpnL0LbPJkID5usjjoRRPVOibqE/a09511ARK/yEYv0OQoIyhfw16h90A6y/j0hUiP8/224swyuWJxsfjLujA==
   dependencies:
-    uploader "^3.6.0"
+    lodash.isequal "^4.5.0"
+    uploader "^3.37.0"
 
 react@18.2.0:
   version "18.2.0"
@@ -4278,22 +4284,22 @@ unique-slug@^3.0.0:
   dependencies:
     imurmurhash "^0.1.4"
 
-upload-js@^2.11.0:
-  version "2.11.2"
-  resolved "https://registry.yarnpkg.com/upload-js/-/upload-js-2.11.2.tgz#b5292b50ae2a21fdda5c0f8f099f3bd4cedb4776"
-  integrity sha512-q6IkwFLA3kL1MbBMvzCbJC0EHjMgjJ399f5QH3Up5rkoVjYXZxTKRgyJQeRT1HpqPQ3gCJdvZuL/Cv1LjBRGMg==
+upload-js@^2.20.0:
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/upload-js/-/upload-js-2.20.0.tgz#b8a27f0d5f7c6658ef96f45b8b1521b6b9636740"
+  integrity sha512-pwu7NejaJrqQrv8w4gfYRLlqgzJXggZs7pleV2kMHL/n8mCDWTX19j5WS/+bBZbtuGTZLtWjt+HJtyxXxiumIA==
   dependencies:
     "@upload-io/upload-api-client-upload-js" "^2.15.0"
     progress-smoother "^1.4.0"
 
-uploader@^3.6.0, uploader@^3.9.0:
-  version "3.9.0"
-  resolved "https://registry.yarnpkg.com/uploader/-/uploader-3.9.0.tgz#e31e845fa6967e69e4edb70a1dfce90fe50e6c80"
-  integrity sha512-sv1p4ZFXQReJNsYGBwToREGqh/SsLgmt8mnpluux8ui78vhwSiHt7LOgfRm7iCguYiPQcVS9NsdkJulq4J46qQ==
+uploader@^3.37.0, uploader@^3.9.0:
+  version "3.37.0"
+  resolved "https://registry.yarnpkg.com/uploader/-/uploader-3.37.0.tgz#425fa31a437e7b899b4d6f4c92024bbb5693000d"
+  integrity sha512-2ugcDRXKEszsL0HhsLjl8wuu8JY2gguM4FE+4lN/SGkSdlrXHsjrWqplsSY9vgNV/hKBv41CUP/aaWqjEsZUYg==
   dependencies:
     classnames "^2.2.6"
     preact "^10.6.5"
-    upload-js "^2.11.0"
+    upload-js "^2.20.0"
 
 uri-js@^4.2.2:
   version "4.4.1"
